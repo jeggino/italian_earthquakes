@@ -10,8 +10,6 @@ import geopandas as gpd
 import datetime
 from datetime import date
 
-from streamlit_elements import elements, mui, html
-
 st.set_page_config(
     page_title="Italian Earthquakes",
     page_icon="🌍",
@@ -25,6 +23,13 @@ footer {visibility: hidden;}
 </style> """, unsafe_allow_html=True)
 
 #---FUNCTIONS---
-def load_dataset():
+@st.cache_data(experimental_allow_widgets=True)  # 👈 Set the parameter
+def get_data():
+    magnitudo = st.slider("Magnitudo")
+    df_raw = pd.read_csv("eartquakes_italy.csv")
+    data = df_raw[df_raw['magnitudo']==magnitudo]
+    return data
 
-    return db.fetch().items
+st.dataframe(data=get_data(), use_container_width=True)
+
+
