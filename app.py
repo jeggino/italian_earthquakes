@@ -25,7 +25,7 @@ footer {visibility: hidden;}
 #---FUNCTIONS---
 @st.cache_data(experimental_allow_widgets=True)  # 👈 Set the parameter
 def get_data():
-    magnitudo = st.slider("Magnitudo")
+    magnitudo = st.select_slider("Magnitudo")
     df_raw = pd.read_csv("eartquakes_italy.csv")
     data = df_raw[df_raw['magnitudo_score']==magnitudo]
     return data
