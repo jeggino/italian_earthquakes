@@ -23,16 +23,19 @@ footer {visibility: hidden;}
 </style> """, unsafe_allow_html=True)
 
 #---FUNCTIONS---
-@st.cache_data(experimental_allow_widgets=True)  # 👈 Set the parameter
+@st.cache_data()  # 👈 Set the parameter
 def get_data():
     df_raw = pd.read_csv("eartquakes_italy.csv")
-    st.slider('How old are you?', 0, 130, 25)
-#     magnitudo = st.slider(label="Magnitudo", min_value=0, max_value=6.2, value =(2.0, 5.0))
-#     mask_magnitudo = (df_raw['magnitudo_score'] >= magnitudo[0]) & (df_raw['magnitudo_score'] <= magnitudo[1])
-#     data = df_raw[mask_magnitudo]
     return df_raw
 
-st.dataframe(data=get_data(), use_container_width=True)
+data = get_data()
+values = st.slider(
+    'Select a range of values',
+    0.0, 6.2, (2.0, 5.0))
+st.write('Values:', values)
+# filtered_data = data[data]
+
+st.dataframe(data=data, use_container_width=True)
 start_color, end_color = st.select_slider(
     'Select a range of color wavelength',
     options=['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
