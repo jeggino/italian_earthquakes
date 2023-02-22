@@ -2,11 +2,13 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 
 import folium
-from folium.plugins import Draw, Fullscreen, LocateControl
+from folium.plugins import Fullscreen,HeatMapWithTime,MiniMap
 from streamlit_folium import st_folium
 
 import pandas as pd
 import geopandas as gpd
+from shapely.geometry import Point
+
 import datetime
 from datetime import date
 
@@ -42,15 +44,64 @@ def get_data():
     
     return filtered_data
 
-# data = get_data()
-# values = st.slider(
-#     'Select a range of values',
-#     0.0, 6.2, (2.0, 5.0))
-# st.write('Values:', values)
-# magnitudo_mask = ((data["magnitudo_score"]>=values[0]) & (data["magnitudo_score"]<=values[1]))
-# filtered_data = data[magnitudo_mask]
+@st.cache_data() 
+def get_heatmap():
+    df_raw = pd.read_csv('earthquakes Italy 1985-2020.csv')
+    df_raw['Data e Ora (ITItalia)'] = df_raw['Data e Ora (ITItalia)'].replace({'\xa0':' '}, regex=True)
+    form = "%Y-%m-%d %H:%M:%S"
+    df_raw['date_time'] = pd.to_datetime(df_raw['Data e Ora (ITItalia)'], format=form)
+    df_raw['magnitudo_score']=df_raw['Magnitudo'].str.split('\xa0',expand=True)[1].astype(float)
+    df_raw = df_raw.drop(['Data e Ora (ITItalia)','Magnitudo','Zona'],axis=1)
+    df_municipalities = gpd.read_file('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_municipalities.geojson')
+    df_municipalities = df_municipalities[['name','prov_name','reg_name','geometry']].rename(columns={'name':'mun_name'})
+    geometry = [Point(xy) for xy in zip(df_raw.Longitudine, df_raw.Latitudine,)]
+    geo_df = gpd.GeoDataFrame(df_raw, geometry=geometry,crs="EPSG:4326")
+
+    pointInPoly_municipalities = gpd.sjoin(geo_df, df_municipalities, op='within').reset_index(drop=True).drop_duplicates()
+    pointInPoly_municipalities['date'] = pointInPoly_municipalities['date_time'].dt.date
+    df_HeatMap = pointInPoly_municipalities[['date', 'Latitudine', 'Longitudine']].sort_values('date').reset_index(drop=True)
+    df_HeatMap['date'] = df_HeatMap['date'].astype(str)
+    lat_long_list = []
+    for i in df_HeatMap.date.unique():
+        temp=[]
+        for index, instance in df_HeatMap[df_HeatMap['date'] == i].iterrows():
+            temp.append([instance['Latitudine'],instance['Longitudine']])
+        lat_long_list.append(temp)
+        
+    # create a map
+    centroid = df_municipalities.centroid
+
+
+    m = folium.Map(location=[centroid.y.mean(), centroid.x.mean()], zoom_start=6,  
+                   tiles='cartodbdark_matter',
+                   attr='&copy'
+                  )
+
+    # define map dimensions
+    fig=Figure(width=700,height=700)
+    fig.add_child(m)
+
+    HeatMapWithTime(lat_long_list,
+                    index=df_HeatMap.date.unique().tolist(),
+                    name='heatmap',
+                    overlay=False,
+                    radius=15,
+                    auto_play=True,
+                    speed_step=1,
+                    position='bottomright',
+                    display_index=True
+    ).add_to(m)
+
+    #fullscreen
+    folium.plugins.Fullscreen(position='topleft', title='Full Screen', title_cancel='Exit Full Screen', force_separate_button=True,).add_to(m)
+
+    return m
+
+
 
 st.dataframe(data=get_data(), use_container_width=True)
+
+st_folium(get_heatmap())
 
 
 
