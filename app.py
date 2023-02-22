@@ -26,7 +26,7 @@ footer {visibility: hidden;}
 @st.cache_data(experimental_allow_widgets=True)  # 👈 Set the parameter
 def get_data():
     df_raw = pd.read_csv("eartquakes_italy.csv")
-    magnitudo = st.select_slider("Magnitudo",options=(df_raw['magnitudo_score'].min(),df_raw['magnitudo_score'].max()))
+    magnitudo = st.slider("Magnitudo", min_value=df_raw['magnitudo_score'].min(), max_value=df_raw['magnitudo_score'].max())
     mask_magnitudo = (df_raw['magnitudo_score'] >= magnitudo[0]) & (df_raw['magnitudo_score'] <= magnitudo[1])
     data = df_raw[mask_magnitudo]
     return data
