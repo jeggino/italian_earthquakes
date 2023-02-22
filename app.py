@@ -33,7 +33,7 @@ def get_data():
     
     values_deepness = st.slider(
     'Deepness',
-    df_raw["Profondità"].min(), df_raw["Profondità"].max(), (df_raw["Profondità"].min(), df_raw["Profondità"].max()))
+    0, 644, (0, 644))
     
     magnitudo_mask = ((df_raw["magnitudo_score"]>=values_magnitudo[0]) & (df_raw["magnitudo_score"]<=values_magnitudo[1]))
     deepness_mask = ((df_raw["Profondità"]>=values_deepness[0]) & (df_raw["Profondità"]<=values_deepness[1]))
