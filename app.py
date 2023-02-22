@@ -38,7 +38,7 @@ def get_data():
     magnitudo_mask = ((df_raw["magnitudo_score"]>=values_magnitudo[0]) & (df_raw["magnitudo_score"]<=values_magnitudo[1]))
     deepness_mask = ((df_raw["Profondità"]>=values_deepness[0]) & (df_raw["Profondità"]<=values_deepness[1]))
     
-    filtered_data = data[magnitudo_mask & deepness_mask]
+    filtered_data = df_raw[magnitudo_mask & deepness_mask]
     
     return filtered_data
 
