@@ -33,13 +33,10 @@ values = st.slider(
     'Select a range of values',
     0.0, 6.2, (2.0, 5.0))
 st.write('Values:', values)
-# filtered_data = data[data]
+magnitudo_mask = ((data["magnitudo_score"]>=values[0]) & (data["magnitudo_score"]<=values[1]))
+filtered_data = data[magnitudo_mask]
 
-st.dataframe(data=data, use_container_width=True)
-start_color, end_color = st.select_slider(
-    'Select a range of color wavelength',
-    options=['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
-    value=('red', 'blue'))
-st.write('You selected wavelengths between', start_color, 'and', end_color)
+st.dataframe(data=filtered_data, use_container_width=True)
+
 
 
