@@ -33,7 +33,10 @@ def get_data():
     return df_raw
 
 st.dataframe(data=get_data(), use_container_width=True)
-df_raw = pd.read_csv("eartquakes_italy.csv")
-st.write(df_raw.info())
+start_color, end_color = st.select_slider(
+    'Select a range of color wavelength',
+    options=['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
+    value=('red', 'blue'))
+st.write('You selected wavelengths between', start_color, 'and', end_color)
 
 
