@@ -48,7 +48,7 @@ def get_data():
 def get_heatmap():
     df_raw = pd.read_csv('Italian_Catalogue.csv')
     form = "%Y-%m-%d %H:%M:%S"
-    df_raw['Time'] = pd.to_datetime(df_raw[Time'], format=form)
+    df_raw['Time'] = pd.to_datetime(df_raw['Time'], format=form)
     df_municipalities = gpd.read_file('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_municipalities.geojson')
     df_municipalities = df_municipalities[['name','prov_name','reg_name','geometry']].rename(columns={'name':'mun_name'})
     geometry = [Point(xy) for xy in zip(df_raw.Longitude, df_raw.Latitude)]
