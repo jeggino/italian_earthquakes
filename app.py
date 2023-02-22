@@ -74,9 +74,7 @@ def get_heatmap():
                    attr='&copy'
                   )
 
-    # define map dimensions
-    fig=Figure(width=700,height=700)
-    fig.add_child(m)
+
 
     HeatMapWithTime(lat_long_list,
                     index=df_HeatMap.date.unique().tolist(),
