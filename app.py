@@ -109,8 +109,8 @@ def get_heatmap():
 
 
 st.dataframe(data=get_data(), use_container_width=True)
-
-st_folium(get_heatmap())
+st.dataframe(data=get_pointInPoly_municipalities(), use_container_width=True)
+# st_folium(get_heatmap())
 
 
 
