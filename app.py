@@ -27,10 +27,12 @@ footer {visibility: hidden;}
 def get_data():
     df_raw = pd.read_csv("eartquakes_italy.csv")
     magnitudo = st.slider("Magnitudo", min_value=0, max_value=6.2, value =(2.0, 5.0))
-    mask_magnitudo = (df_raw['magnitudo_score'] >= magnitudo[0]) & (df_raw['magnitudo_score'] <= magnitudo[1])
-    data = df_raw[mask_magnitudo]
-    return data
+#     mask_magnitudo = (df_raw['magnitudo_score'] >= magnitudo[0]) & (df_raw['magnitudo_score'] <= magnitudo[1])
+#     data = df_raw[mask_magnitudo]
+    return df_raw
 
 st.dataframe(data=get_data(), use_container_width=True)
+df_raw = pd.read_csv("eartquakes_italy.csv")
+st.write(df_raw.info())
 
 
