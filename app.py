@@ -23,20 +23,34 @@ footer {visibility: hidden;}
 </style> """, unsafe_allow_html=True)
 
 #---FUNCTIONS---
-@st.cache_data()  # 👈 Set the parameter
+@st.cache_data(experimental_allow_widgets=True)  # 👈 Set the parameter
 def get_data():
+    
     df_raw = pd.read_csv("eartquakes_italy.csv")
-    return df_raw
-
-data = get_data()
-values = st.slider(
-    'Select a range of values',
+    values_magnitudo = st.slider(
+    'Magnitudo',
     0.0, 6.2, (2.0, 5.0))
-st.write('Values:', values)
-magnitudo_mask = ((data["magnitudo_score"]>=values[0]) & (data["magnitudo_score"]<=values[1]))
-filtered_data = data[magnitudo_mask]
+    
+    values_deepness = st.slider(
+    'Deepness',
+    0.0, 6.2, (2.0, 5.0))
+    
+    magnitudo_mask = ((df_raw["magnitudo_score"]>=values_magnitudo[0]) & (df_raw["magnitudo_score"]<=values_magnitudo[1]))
+    deepness_mask = ((df_raw["Profondità"]>=values_deepness[0]) & (df_raw["Profondità"]<=values_deepness[1]))
+    
+    filtered_data = data[magnitudo_mask & deepness_mask]
+    
+    return filtered_data
 
-st.dataframe(data=filtered_data, use_container_width=True)
+# data = get_data()
+# values = st.slider(
+#     'Select a range of values',
+#     0.0, 6.2, (2.0, 5.0))
+# st.write('Values:', values)
+# magnitudo_mask = ((data["magnitudo_score"]>=values[0]) & (data["magnitudo_score"]<=values[1]))
+# filtered_data = data[magnitudo_mask]
+
+st.dataframe(data=get_data(), use_container_width=True)
 
 
 
