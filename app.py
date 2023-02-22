@@ -27,7 +27,7 @@ footer {visibility: hidden;}
 def get_data():
     magnitudo = st.slider("Magnitudo")
     df_raw = pd.read_csv("eartquakes_italy.csv")
-#     data = df_raw[df_raw['magnitudo']==magnitudo]
+    data = df_raw[df_raw['magnitudo_score']==magnitudo]
     return df_raw
 
 st.dataframe(data=get_data(), use_container_width=True)
