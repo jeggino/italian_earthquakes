@@ -46,26 +46,23 @@ def get_data():
 
 @st.cache_data() 
 def get_heatmap():
-    df_raw = pd.read_csv('earthquakes Italy 1985-2020.csv')
-    df_raw['Data e Ora (ITItalia)'] = df_raw['Data e Ora (ITItalia)'].replace({'\xa0':' '}, regex=True)
+    df_raw = pd.read_csv('Italian_Catalogue.csv')
     form = "%Y-%m-%d %H:%M:%S"
-    df_raw['date_time'] = pd.to_datetime(df_raw['Data e Ora (ITItalia)'], format=form)
-    df_raw['magnitudo_score']=df_raw['Magnitudo'].str.split('\xa0',expand=True)[1].astype(float)
-    df_raw = df_raw.drop(['Data e Ora (ITItalia)','Magnitudo','Zona'],axis=1)
+    df_raw['Time'] = pd.to_datetime(df_raw[Time'], format=form)
     df_municipalities = gpd.read_file('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_municipalities.geojson')
     df_municipalities = df_municipalities[['name','prov_name','reg_name','geometry']].rename(columns={'name':'mun_name'})
-    geometry = [Point(xy) for xy in zip(df_raw.Longitudine, df_raw.Latitudine,)]
+    geometry = [Point(xy) for xy in zip(df_raw.Longitude, df_raw.Latitude)]
     geo_df = gpd.GeoDataFrame(df_raw, geometry=geometry,crs="EPSG:4326")
 
     pointInPoly_municipalities = gpd.sjoin(geo_df, df_municipalities, op='within').reset_index(drop=True).drop_duplicates()
-    pointInPoly_municipalities['date'] = pointInPoly_municipalities['date_time'].dt.date
-    df_HeatMap = pointInPoly_municipalities[['date', 'Latitudine', 'Longitudine']].sort_values('date').reset_index(drop=True)
+    pointInPoly_municipalities['date'] = pointInPoly_municipalities['Time'].dt.date
+    df_HeatMap = pointInPoly_municipalities[['date', 'Latitude', 'Longitude']].sort_values('date').reset_index(drop=True)
     df_HeatMap['date'] = df_HeatMap['date'].astype(str)
     lat_long_list = []
     for i in df_HeatMap.date.unique():
         temp=[]
         for index, instance in df_HeatMap[df_HeatMap['date'] == i].iterrows():
-            temp.append([instance['Latitudine'],instance['Longitudine']])
+            temp.append([instance['Latitude'],instance['Longitude']])
         lat_long_list.append(temp)
         
     # create a map
