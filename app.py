@@ -45,18 +45,32 @@ def get_data():
     return filtered_data
 
 @st.cache_data() 
-def get_heatmap():
+def get_municipalities():
+    df_municipalities = gpd.read_file('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_municipalities.geojson')
+    df_municipalities = df_municipalities[['name','prov_name','reg_name','geometry']].rename(columns={'name':'mun_name'})
+    return df_municipalities
+
+@st.cache_data() 
+def get_dataset_2():
     df_raw = pd.read_csv('Italian_Catalogue.csv')
     form = "%Y-%m-%d %H:%M:%S"
     df_raw['Time'] = pd.to_datetime(df_raw['Time'], format=form)
-    df_municipalities = gpd.read_file('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_municipalities.geojson')
-    df_municipalities = df_municipalities[['name','prov_name','reg_name','geometry']].rename(columns={'name':'mun_name'})
     geometry = [Point(xy) for xy in zip(df_raw.Longitude, df_raw.Latitude)]
     geo_df = gpd.GeoDataFrame(df_raw, geometry=geometry,crs="EPSG:4326")
+    
+    return geo_df
+    
 
-    pointInPoly_municipalities = gpd.sjoin(geo_df, df_municipalities, op='within').reset_index(drop=True).drop_duplicates()
+@st.cache_data() 
+def get_pointInPoly_municipalities():
+    pointInPoly_municipalities = gpd.sjoin(get_dataset_2(), get_municipalities(), op='within').reset_index(drop=True).drop_duplicates()
     pointInPoly_municipalities['date'] = pointInPoly_municipalities['Time'].dt.date
-    df_HeatMap = pointInPoly_municipalities[['date', 'Latitude', 'Longitude']].sort_values('date').reset_index(drop=True)
+    return pointInPoly_municipalities
+    
+@st.cache_data() 
+def get_heatmap():    
+    
+    df_HeatMap = get_pointInPoly_municipalities()[['date', 'Latitude', 'Longitude']].sort_values('date').reset_index(drop=True)
     df_HeatMap['date'] = df_HeatMap['date'].astype(str)
     lat_long_list = []
     for i in df_HeatMap.date.unique():
@@ -66,7 +80,7 @@ def get_heatmap():
         lat_long_list.append(temp)
         
     # create a map
-    centroid = df_municipalities.centroid
+    centroid = get_municipalities().centroid
 
 
     m = folium.Map(location=[centroid.y.mean(), centroid.x.mean()], zoom_start=6,  
