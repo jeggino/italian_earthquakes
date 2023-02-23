@@ -67,9 +67,9 @@ deepness_mask = ((df["Depth/Km"]>=values_deepness[0]) & (df["Depth/Km"]<=values_
 
 filtered_data = df[magnitudo_mask & deepness_mask]
     
-left_2,  right_2 = st.columns([2,3], gap="large")
+left, center, right = st.columns([2,3,3], gap="large")
 
-with left_2:
+with left:
     
     source = filtered_data.groupby("reg_name",as_index=False).size()
     chart = alt.Chart(source).mark_bar().encode(
@@ -80,7 +80,7 @@ with left_2:
     st.altair_chart(chart, use_container_width=True, theme="streamlit")
     
 
-with right_2:
+with center:
     try:
         tooltip = {
            "html": "<b>Region:</b> {reg_name} <br /><b>Province:</b> {prov_name} <br /><b>Municipality:</b> {mun_name} <br /><b>Date:</b> {Time} <br /><b>Magnitude:</b> {Magnitude} <br /><b>Depth:</b> {Depth/Km} Km",
@@ -119,7 +119,8 @@ with right_2:
                 )
             ],
         ))
-        
+    
+    with right:
         st.pydeck_chart(pdk.Deck(
             map_provider="mapbox", 
             map_style=pdk.map_styles.SATELLITE,
