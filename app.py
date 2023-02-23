@@ -120,7 +120,7 @@ with center:
 with right:
     st.pydeck_chart(pdk.Deck(
         map_provider="mapbox", 
-        map_style=pdk.map_styles.SATELLITE,
+        map_style="road",
         initial_view_state=pdk.ViewState(
             latitude=filtered_data["Latitude"].mean(),
             longitude=filtered_data["Longitude"].mean(),
