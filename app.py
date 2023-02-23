@@ -133,11 +133,11 @@ with right:
             pdk.Layer(
                 "HeatmapLayer",
                 data=filtered_data,
-                opacity=0.9,
+                opacity=1,
+                aggregation=pdk.types.String("MEAN"),
+                color_range=COLOR_BREWER_BLUE_SCALE,
+                threshold=1,
                 get_position='[Longitude, Latitude]',
-                threshold=0.75,
-#                 aggregation=pdk.types.String("MEAN"),
-#                 get_weight="weight",
                 pickable=True,
             )
         ],
