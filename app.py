@@ -80,7 +80,7 @@ with left_2:
     source = filtered_data.groupby("reg_name",as_index=False).size()
     chart = alt.Chart(source).mark_bar().encode(
         x=alt.X('size:Q', title="Number of earthquakes"),
-        y=alt.Y('reg_name:N', sort='-x', title=None)
+        y=alt.Y('reg_name:N', sort='-x', title="Region")
     )
 
     st.altair_chart(chart, use_container_width=True, theme="streamlit")
