@@ -46,6 +46,8 @@ def get_data():
 
 # filtered_data = df[magnitudo_mask & deepness_mask]
 
+st.write(get_data()["Depth/Km"].min())
+
 st.pydeck_chart(pdk.Deck(
     map_style=None,
     initial_view_state=pdk.ViewState(
