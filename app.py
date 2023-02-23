@@ -60,14 +60,11 @@ st.pydeck_chart(pdk.Deck(
     ),
     layers=[
         pdk.Layer(
-           'HexagonLayer',
+           'ScatterplotLayer',
            data=filtered_data,
            get_position='[Longitude, Latitude]',
            radius=1000,
-           elevation_scale=100,
-           elevation_range=[0, 1000],
-           pickable=True,
-           extruded=True,
+           get_color='[200, 30, 0, 160]'
         )
     ],
 ))
