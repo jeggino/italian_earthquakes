@@ -117,6 +117,7 @@ with center:
 
             )
         ],
+        use_container_width=True
     ))
     
 with right:
@@ -139,6 +140,7 @@ with right:
                 pickable=True,
             )
         ],
+        use_container_width=True
     ))
         
     
