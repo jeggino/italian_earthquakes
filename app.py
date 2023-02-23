@@ -70,7 +70,7 @@ with left:
 with right:
     try:
         tooltip = {
-           "html": "<b>Region:</b> {reg_name} <br /><b>Date:</b> {Time} <br /><b>Magnitude:</b> {Magnitude} <br /><b>Depth:</b> {Depth/Km} Km",
+           "html": "<b>Region:</b> {reg_name} <br /><b>Province:</b> {prov_name} <br /><b>Municipality:</b> {mun_name} <br /><b>Date:</b> {Time} <br /><b>Magnitude:</b> {Magnitude} <br /><b>Depth:</b> {Depth/Km} Km",
            "style": {
                 "backgroundColor": "steelblue",
                 "color": "white"
