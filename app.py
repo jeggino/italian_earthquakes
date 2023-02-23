@@ -66,7 +66,7 @@ st.pydeck_chart(pdk.Deck(
             opacity=0.8,
             stroked=True,
             filled=True,
-            radius_scale=6,
+            radius_scale=100,
             radius_min_pixels=1,
             radius_max_pixels=100,
             line_width_min_pixels=1,
