@@ -79,7 +79,7 @@ with left_2:
     
     source = filtered_data.groupby("reg_name",as_index=False).size()
     chart = alt.Chart(source).mark_bar().encode(
-        x=alt.X('size:Q', title=None),
+        x=alt.X('size:Q', title="Numbher of earthquakes"),
         y=alt.Y('reg_name:N', sort='-x', title=None)
     )
 
