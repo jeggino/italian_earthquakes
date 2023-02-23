@@ -12,6 +12,8 @@ from shapely.geometry import Point
 import datetime
 from datetime import date
 
+import pydeck as pdk
+
 st.set_page_config(
     page_title="Italian Earthquakes",
     page_icon="🌍",
@@ -46,6 +48,28 @@ def get_data():
 #     filtered_data = df_raw[magnitudo_mask & deepness_mask]
     
     return  df_raw 
+
+st.pydeck_chart(pdk.Deck(
+    map_style=None,
+    initial_view_state=pdk.ViewState(
+        latitude=0,
+        longitude=,
+        zoom=5,
+        pitch=50,
+    ),
+    layers=[
+        pdk.Layer(
+           'HexagonLayer',
+           data=get_data(),
+           get_position='[Longitude, Latitude]',
+           radius=200,
+           elevation_scale=4,
+           elevation_range=[0, 1000],
+           pickable=True,
+           extruded=True,
+        )
+    ],
+))
 
 # @st.cache_data() 
 # def get_municipalities():
