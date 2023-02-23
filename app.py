@@ -125,7 +125,7 @@ with right:
             latitude=filtered_data["Latitude"].mean(),
             longitude=filtered_data["Longitude"].mean(),
             zoom=4,
-            pitch=50,
+            pitch=0,
         ),
         layers=[
             pdk.Layer(
