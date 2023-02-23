@@ -57,34 +57,39 @@ with left:
     filtered_data = df[magnitudo_mask & deepness_mask]
 
 with right:
-    st.pydeck_chart(pdk.Deck(
-        map_style=None,
-        initial_view_state=pdk.ViewState(
-            latitude=filtered_data["Latitude"].mean(),
-            longitude=filtered_data["Longitude"].mean(),
-            zoom=4,
-            pitch=50,
-        ),
-        layers=[
-            pdk.Layer(
-                "ScatterplotLayer",
-                data=filtered_data,
-                pickable=True,
-                opacity=0.3,
-                stroked=True,
-                filled=True,
-                radius_scale=10,
-                radius_min_pixels=10,
-                radius_max_pixels=100,
-                line_width_min_pixels=1,
-                get_position='[Longitude, Latitude]',
-                get_radius="Magnitude",
-                get_fill_color=[255, 140, 0],
-                get_line_color=[0, 0, 0],
+    try:
+        st.pydeck_chart(pdk.Deck(
+            map_style=None,
+            initial_view_state=pdk.ViewState(
+                latitude=filtered_data["Latitude"].mean(),
+                longitude=filtered_data["Longitude"].mean(),
+                zoom=4,
+                pitch=50,
+            ),
+            layers=[
+                pdk.Layer(
+                    "ScatterplotLayer",
+                    data=filtered_data,
+                    pickable=True,
+                    opacity=0.3,
+                    stroked=True,
+                    filled=True,
+                    radius_scale=10,
+                    radius_min_pixels=10,
+                    radius_max_pixels=100,
+                    line_width_min_pixels=1,
+                    get_position='[Longitude, Latitude]',
+                    get_radius="Magnitude",
+                    get_fill_color=[255, 140, 0],
+                    get_line_color=[0, 0, 0],
 
-            )
-        ],
-    ))
+                )
+            ],
+        ))
+    except:
+        st.error('No data', icon="🚨")
+        st.stop()
+        
 
 # @st.cache_data() 
 # def get_municipalities():
