@@ -134,7 +134,7 @@ with right_2:
                     "HeatmapLayer",
                     data=filtered_data,
                     opacity=0.9,
-                    get_position=[Longitude, Latitude],
+                    get_position='[Longitude, Latitude]',
                     threshold=0.75,
                     aggregation=pdk.types.String("MEAN"),
                     get_weight="weight",
