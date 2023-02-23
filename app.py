@@ -34,7 +34,7 @@ def get_data():
                         sep="|")[['Time', 'Latitude', 'Longitude', 'Depth/Km', 'Magnitude']]
     df_raw["Time"] = df_raw["Time"].str.split("T",expand=True)[0]
     
-    values_magnitude = st.slider('Magnitude',df_raw.Magnitude.min(), df_raw.Magnitude.max(), (df_raw.Magnitude.min(), df_raw.Magnitude.max()))
+    values_magnitude = st.slider('Magnitude',df_raw["Magnitude"].min(), df_raw["Magnitude"].max(), (df_raw["Magnitude"].min(), df_raw["Magnitude"].max()))
     
     values_deepness = st.slider('Depth/Km',df_raw["Depth/Km"].min(), df_raw["Depth/Km"].max(), (df_raw["Depth/Km"].min(), df_raw["Depth/Km"].max()))
     
