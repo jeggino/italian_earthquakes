@@ -96,7 +96,7 @@ with right:
                     elevation_scale=10,
                     pickable=True,
                     auto_highlight=True,
-                    radius=200,
+                    radius=2000,
                     color=[255, 140, 0],
                     opacity=0.3,
                 ),
