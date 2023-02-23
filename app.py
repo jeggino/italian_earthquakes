@@ -32,8 +32,11 @@ footer {visibility: hidden;}
 @st.cache_data(experimental_allow_widgets=True)  # 👈 Set the parameter
 def get_data():
     try:
-        starttime = st.date_input("Start time", value=datetime.date(2022, 7, 6), min_value=None, max_value=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
-        endtime = st.date_input("End time", value=None, min_value=None, max_value=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
+        left,right = st_columns(2)
+        with left:
+            starttime = st.date_input("Start time", value=datetime.date(2022, 7, 6), min_value=None, max_value=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
+        with right:
+            endtime = st.date_input("End time", value=None, min_value=None, max_value=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
         df_raw = pd.read_csv(f"https://webservices.ingv.it/fdsnws/event/1/query?starttime={str(starttime)}T00%3A00%3A00&{str(endtime)}=2023-02-23T23%3A59%3A59&minmag=2&maxmag=10&mindepth=-10&maxdepth=1000&minlat=35&maxlat=49&minlon=5&maxlon=20&minversion=100&orderby=time-asc&format=text&limit=10000",
                             sep="|")[['Time', 'Latitude', 'Longitude', 'Depth/Km', 'Magnitude']]
         df_raw["Time"] = df_raw["Time"].str.split("T",expand=True)[0]
@@ -56,7 +59,7 @@ def get_data():
         
 # st.dataframe(get_data())
 
-col_1,  col_2, col_3, col_4 = st.columns([2,2,3,3], gap="large")
+col_1,  col_3, col_4 = st.columns([2,3,3], gap="large")
 
 with col_1: 
     df = get_data()
