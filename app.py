@@ -39,8 +39,6 @@ def get_data():
     
     return  df_raw 
 
-st.write(str(date))
-
 left, right = st.columns([1,3],gap="large")
 
 with left: 
