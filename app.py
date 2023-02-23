@@ -58,6 +58,13 @@ with left:
 
 with right:
     try:
+        tooltip = {
+           "html": "<b>Magnitude:</b> {Magnitude} </nb>Depth/Km:</b> {Depth/Km}",
+           "style": {
+                "backgroundColor": "steelblue",
+                "color": "white"
+           }
+        }
         st.pydeck_chart(pdk.Deck(
             map_style=None,
             initial_view_state=pdk.ViewState(
