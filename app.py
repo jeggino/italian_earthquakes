@@ -38,46 +38,48 @@ def get_data():
     
     return  df_raw 
 
-df = get_data()
+left, right = st.columns([1:3])
 
-values_magnitude = st.slider('Magnitude',float(df.Magnitude.min()), float(df.Magnitude.max()), (float(df.Magnitude.min()), float(df.Magnitude.max())))
-values_deepness = st.slider('Depth/Km',int(df["Depth/Km"].min()), int(df["Depth/Km"].max()), (int(df["Depth/Km"].min()), int(df["Depth/Km"].max())))
+with left: 
+    df = get_data()
 
-magnitudo_mask = ((df["Magnitude"]>=values_magnitude[0]) & (df["Magnitude"]<=values_magnitude[1]))
-deepness_mask = ((df["Depth/Km"]>=values_deepness[0]) & (df["Depth/Km"]<=values_deepness[1]))
+    values_magnitude = st.slider('Magnitude',float(df.Magnitude.min()), float(df.Magnitude.max()), (float(df.Magnitude.min()), float(df.Magnitude.max())))
+    values_deepness = st.slider('Depth/Km',int(df["Depth/Km"].min()), int(df["Depth/Km"].max()), (int(df["Depth/Km"].min()), int(df["Depth/Km"].max())))
 
-filtered_data = df[magnitudo_mask & deepness_mask]
+    magnitudo_mask = ((df["Magnitude"]>=values_magnitude[0]) & (df["Magnitude"]<=values_magnitude[1]))
+    deepness_mask = ((df["Depth/Km"]>=values_deepness[0]) & (df["Depth/Km"]<=values_deepness[1]))
 
-# st.write(df.Magnitude.max())
+    filtered_data = df[magnitudo_mask & deepness_mask]
 
-st.pydeck_chart(pdk.Deck(
-    map_style=None,
-    initial_view_state=pdk.ViewState(
-        latitude=filtered_data["Latitude"].mean(),
-        longitude=filtered_data["Longitude"].mean(),
-        zoom=5,
-        pitch=50,
-    ),
-    layers=[
-        pdk.Layer(
-            "ScatterplotLayer",
-            data=filtered_data,
-            pickable=True,
-            opacity=0.3,
-            stroked=True,
-            filled=True,
-            radius_scale=10,
-            radius_min_pixels=10,
-            radius_max_pixels=100,
-            line_width_min_pixels=1,
-            get_position='[Longitude, Latitude]',
-            get_radius="Magnitude",
-            get_fill_color=[255, 140, 0],
-            get_line_color=[0, 0, 0],
-           
-        )
-    ],
-))
+with right:
+    st.pydeck_chart(pdk.Deck(
+        map_style=None,
+        initial_view_state=pdk.ViewState(
+            latitude=filtered_data["Latitude"].mean(),
+            longitude=filtered_data["Longitude"].mean(),
+            zoom=5,
+            pitch=50,
+        ),
+        layers=[
+            pdk.Layer(
+                "ScatterplotLayer",
+                data=filtered_data,
+                pickable=True,
+                opacity=0.3,
+                stroked=True,
+                filled=True,
+                radius_scale=10,
+                radius_min_pixels=10,
+                radius_max_pixels=100,
+                line_width_min_pixels=1,
+                get_position='[Longitude, Latitude]',
+                get_radius="Magnitude",
+                get_fill_color=[255, 140, 0],
+                get_line_color=[0, 0, 0],
+
+            )
+        ],
+    ))
 
 # @st.cache_data() 
 # def get_municipalities():
