@@ -41,6 +41,7 @@ def get_data():
         return  df_raw 
     except:
         st.error('DAte input error', icon="🚨")
+        st.stop()
 
 left, right = st.columns([1,3],gap="large")
 
