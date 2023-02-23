@@ -61,6 +61,7 @@ with left:
 
     values_magnitude = st.slider('Magnitude',int(df.Magnitude.min()), int(df.Magnitude.max()), (int(df.Magnitude.min()), int(df.Magnitude.max())))
     values_deepness = st.slider('Depth/Km',int(df["Depth/Km"].min()), int(df["Depth/Km"].max()), (int(df["Depth/Km"].min()), int(df["Depth/Km"].max())))
+    option = st.selectbox('Select variable',('Magnitude', 'Depth/Km'))
 
     magnitudo_mask = ((df["Magnitude"]>=values_magnitude[0]) & (df["Magnitude"]<=values_magnitude[1]))
     deepness_mask = ((df["Depth/Km"]>=values_deepness[0]) & (df["Depth/Km"]<=values_deepness[1]))
@@ -90,7 +91,7 @@ with right:
                 pdk.Layer(
                     "ColumnLayer",
                     data=df,
-                    get_elevation="Magnitude",
+                    get_elevation=option,
                     get_position='[Longitude, Latitude]',
                     elevation_scale=10000,
                     pickable=True,
