@@ -53,9 +53,9 @@ filtered_data = df[magnitudo_mask & deepness_mask]
 st.pydeck_chart(pdk.Deck(
     map_style=None,
     initial_view_state=pdk.ViewState(
-        latitude=0,
-        longitude=0,
-        zoom=5,
+        latitude=filtered_data["Latitude"].mean(),
+        longitude=filtered_data["Longitude"].mean(),
+        zoom=7,
         pitch=50,
     ),
     layers=[
