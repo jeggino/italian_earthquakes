@@ -134,8 +134,6 @@ with right:
                 "HeatmapLayer",
                 data=filtered_data,
                 opacity=1,
-                aggregation=pdk.types.String("MEAN"),
-                color_range=COLOR_BREWER_BLUE_SCALE,
                 threshold=1,
                 get_position='[Longitude, Latitude]',
                 pickable=True,
