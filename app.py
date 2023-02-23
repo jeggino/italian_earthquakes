@@ -34,9 +34,7 @@ def get_data():
                         sep="|")[['Time', 'Latitude', 'Longitude', 'Depth/Km', 'Magnitude']]
     df_raw["Time"] = df_raw["Time"].str.split("T",expand=True)[0]
     
-    values_magnitude = st.slider(
-    'Magnitude',
-    0.0, 7, (2.0, 5.0))
+    values_magnitude = st.slider('Magnitude',0.0, 7.0, (2.0, 5.0))
     
     values_deepness = st.slider(
     'Depth/Km',
