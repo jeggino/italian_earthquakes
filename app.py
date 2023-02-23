@@ -54,8 +54,6 @@ def get_data():
         st.error('Date input error', icon="🚨")
         st.stop()
         
-# st.dataframe(get_data())
-
 
 df = get_data()
     
