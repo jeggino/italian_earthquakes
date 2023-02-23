@@ -38,7 +38,7 @@ def get_data():
     
     return  df_raw 
 
-left, right = st.columns([1:3])
+left, right = st.columns([1,3])
 
 with left: 
     df = get_data()
