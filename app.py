@@ -38,7 +38,7 @@ def get_data():
 
 df = get_data()
 
-values_magnitude = st.slider('Magnitude',df.Magnitude.min(), df.Magnitude.max(), (df.Magnitude.min(), df.Magnitude.max()))
+values_magnitude = st.slider('Magnitude',int(df.Magnitude.min()), int(df.Magnitude.max()), (int(df.Magnitude.min()), int(df.Magnitude.max())))
 values_deepness = st.slider('Depth/Km',df["Depth/Km"].min(), df["Depth/Km"].max(), (df["Depth/Km"].min(), df["Depth/Km"].max()))
 
 magnitudo_mask = ((df["Magnitude"]>=values_magnitude[0]) & (df["Magnitude"]<=values_magnitude[1]))
