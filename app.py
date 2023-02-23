@@ -32,7 +32,7 @@ footer {visibility: hidden;}
 @st.cache_data(experimental_allow_widgets=True)  # 👈 Set the parameter
 def get_data():
     try:
-        left,right = st_columns(2)
+        left,right = st.columns(2)
         with left:
             starttime = st.date_input("Start time", value=datetime.date(2022, 7, 6), min_value=None, max_value=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
         with right:
