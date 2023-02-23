@@ -53,7 +53,7 @@ st.pydeck_chart(pdk.Deck(
     map_style=None,
     initial_view_state=pdk.ViewState(
         latitude=0,
-        longitude=,
+        longitude=0,
         zoom=5,
         pitch=50,
     ),
@@ -135,7 +135,7 @@ st.pydeck_chart(pdk.Deck(
 
 
 
-st.dataframe(data=get_data(), use_container_width=True)
+# st.dataframe(data=get_data(), use_container_width=True)
 # st.dataframe(data=get_pointInPoly_municipalities(), use_container_width=True)
 # st_folium(get_heatmap())
 
