@@ -67,7 +67,7 @@ deepness_mask = ((df["Depth/Km"]>=values_deepness[0]) & (df["Depth/Km"]<=values_
 
 filtered_data = df[magnitudo_mask & deepness_mask]
     
-left, center, right = st.columns([2,3,3], gap="large")
+left, center, right = st.columns([3,2,2], gap="large")
 
 with left:
     
