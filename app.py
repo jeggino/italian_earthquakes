@@ -34,11 +34,9 @@ def get_data():
                         sep="|")[['Time', 'Latitude', 'Longitude', 'Depth/Km', 'Magnitude']]
     df_raw["Time"] = df_raw["Time"].str.split("T",expand=True)[0]
     
-    values_magnitude = st.slider('Magnitude',0.0, 7.0, (2.0, 5.0))
+    values_magnitude = st.slider('Magnitude',df_raw.Magnitude.min(), df_raw.Magnitude.max(), (df_raw.Magnitude.min(), df_raw.Magnitude.max()))
     
-    values_deepness = st.slider(
-    'Depth/Km',
-    0, 644, (0, 644))
+    values_deepness = st.slider('Depth/Km',df_raw["Depth/Km"].min(), df_raw["Depth/Km"].max(), (df_raw["Depth/Km"].min(), df_raw["Depth/Km"].max()))
     
     magnitudo_mask = ((df_raw["Magnitude"]>=values_magnitude[0]) & (df_raw["Magnitude"]<=values_magnitude[1]))
     deepness_mask = ((df_raw["Depth/Km"]>=values_deepness[0]) & (df_raw["Depth/Km"]<=values_deepness[1]))
@@ -60,7 +58,7 @@ st.pydeck_chart(pdk.Deck(
            'HexagonLayer',
            data=get_data(),
            get_position='[Longitude, Latitude]',
-           radius=2000,
+           radius=8000,
            elevation_scale=10,
            elevation_range=[0, 1000],
            pickable=True,
