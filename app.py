@@ -40,8 +40,8 @@ def get_data():
     'Depth/Km',
     0, 644, (0, 644))
     
-    magnitudo_mask = ((df_raw["Magnitude"]>=magnitudo_mask[0]) & (df_raw["Magnitude"]<=magnitudo_mask[1]))
-    deepness_mask = ((df_raw["Depth/Km"]>=deepness_mask[0]) & (df_raw["Depth/Km"]<=deepness_mask[1]))
+    magnitudo_mask = ((df_raw["Magnitude"]>=values_magnitude[0]) & (df_raw["Magnitude"]<=values_magnitude[1]))
+    deepness_mask = ((df_raw["Depth/Km"]>=values_deepness[0]) & (df_raw["Depth/Km"]<=values_deepness[1]))
     
     filtered_data = df_raw[magnitudo_mask & deepness_mask]
     
