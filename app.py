@@ -34,16 +34,17 @@ def get_data():
                         sep="|")[['Time', 'Latitude', 'Longitude', 'Depth/Km', 'Magnitude']]
     df_raw["Time"] = df_raw["Time"].str.split("T",expand=True)[0]
     
-    values_magnitude = st.slider('Magnitude',df_raw["Magnitude"].min(), df_raw["Magnitude"].max(), (df_raw["Magnitude"].min(), df_raw["Magnitude"].max()))
+    return  df_raw 
+
+df = get_data()
+values_magnitude = st.slider('Magnitude',df["Magnitude"].min(), df["Magnitude"].max(), (df["Magnitude"].min(), df["Magnitude"].max()))
     
-    values_deepness = st.slider('Depth/Km',df_raw["Depth/Km"].min(), df_raw["Depth/Km"].max(), (df_raw["Depth/Km"].min(), df_raw["Depth/Km"].max()))
-    
-    magnitudo_mask = ((df_raw["Magnitude"]>=values_magnitude[0]) & (df_raw["Magnitude"]<=values_magnitude[1]))
-    deepness_mask = ((df_raw["Depth/Km"]>=values_deepness[0]) & (df_raw["Depth/Km"]<=values_deepness[1]))
-    
-    filtered_data = df_raw[magnitudo_mask & deepness_mask]
-    
-    return  filtered_data 
+values_deepness = st.slider('Depth/Km',df["Depth/Km"].min(), df["Depth/Km"].max(), (df["Depth/Km"].min(), df["Depth/Km"].max()))
+
+magnitudo_mask = ((df["Magnitude"]>=values_magnitude[0]) & (df["Magnitude"]<=values_magnitude[1]))
+deepness_mask = ((df["Depth/Km"]>=values_deepness[0]) & (df["Depth/Km"]<=values_deepness[1]))
+
+filtered_data = df[magnitudo_mask & deepness_mask]
 
 st.pydeck_chart(pdk.Deck(
     map_style=None,
