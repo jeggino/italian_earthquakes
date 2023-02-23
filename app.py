@@ -92,10 +92,10 @@ with right:
                     data=df,
                     get_elevation="Magnitude",
                     get_position='[Longitude, Latitude]',
-                    elevation_scale=100,
+                    elevation_scale=1000,
                     pickable=True,
                     auto_highlight=True,
-                    radius=20000,
+                    radius=200,
                 ),
             ]
 #             layers=[
