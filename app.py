@@ -66,7 +66,9 @@ with right:
            }
         }
         st.pydeck_chart(pdk.Deck(
-            map_style=None,
+            map_provider="mapbox", 
+            map_style=pdk.map_styles.SATELLITE,
+            tooltip=tooltip,
             initial_view_state=pdk.ViewState(
                 latitude=filtered_data["Latitude"].mean(),
                 longitude=filtered_data["Longitude"].mean(),
