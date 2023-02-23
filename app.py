@@ -30,7 +30,7 @@ footer {visibility: hidden;}
 @st.cache_data(experimental_allow_widgets=True)  # 👈 Set the parameter
 def get_data():
     try:
-        starttime = st.date_input("Start time", value=None, min_value=None, max_value=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
+        starttime = st.date_input("Start time", value=datetime.date(2022, 7, 6), min_value=None, max_value=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
         endtime = st.date_input("End time", value=None, min_value=None, max_value=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
         df_raw = pd.read_csv(f"https://webservices.ingv.it/fdsnws/event/1/query?starttime={str(starttime)}T00%3A00%3A00&{str(endtime)}=2023-02-23T23%3A59%3A59&minmag=2&maxmag=10&mindepth=-10&maxdepth=1000&minlat=35&maxlat=49&minlon=5&maxlon=20&minversion=100&orderby=time-asc&format=text&limit=10000",
                             sep="|")[['Time', 'Latitude', 'Longitude', 'Depth/Km', 'Magnitude']]
@@ -52,62 +52,62 @@ def get_data():
         st.error('Date input error', icon="🚨")
         st.stop()
         
-st.dataframe(get_data())
+# st.dataframe(get_data())
 
-# left, right = st.columns([1,3],gap="large")
+left, right = st.columns([1,3],gap="large")
 
-# with left: 
-#     df = get_data()
+with left: 
+    df = get_data()
 
-#     values_magnitude = st.slider('Magnitude',int(df.Magnitude.min()), int(df.Magnitude.max()), (int(df.Magnitude.min()), int(df.Magnitude.max())))
-#     values_deepness = st.slider('Depth/Km',int(df["Depth/Km"].min()), int(df["Depth/Km"].max()), (int(df["Depth/Km"].min()), int(df["Depth/Km"].max())))
+    values_magnitude = st.slider('Magnitude',int(df.Magnitude.min()), int(df.Magnitude.max()), (int(df.Magnitude.min()), int(df.Magnitude.max())))
+    values_deepness = st.slider('Depth/Km',int(df["Depth/Km"].min()), int(df["Depth/Km"].max()), (int(df["Depth/Km"].min()), int(df["Depth/Km"].max())))
 
-#     magnitudo_mask = ((df["Magnitude"]>=values_magnitude[0]) & (df["Magnitude"]<=values_magnitude[1]))
-#     deepness_mask = ((df["Depth/Km"]>=values_deepness[0]) & (df["Depth/Km"]<=values_deepness[1]))
+    magnitudo_mask = ((df["Magnitude"]>=values_magnitude[0]) & (df["Magnitude"]<=values_magnitude[1]))
+    deepness_mask = ((df["Depth/Km"]>=values_deepness[0]) & (df["Depth/Km"]<=values_deepness[1]))
 
-#     filtered_data = df[magnitudo_mask & deepness_mask]
+    filtered_data = df[magnitudo_mask & deepness_mask]
 
-# with right:
-#     try:
-#         tooltip = {
-#            "html": "<b>Region:</b> {reg_name} <br /><b>Date:</b> {Time} <br /><b>Magnitude:</b> {Magnitude} <br /><b>Depth:</b> {Depth/Km} Km",
-#            "style": {
-#                 "backgroundColor": "steelblue",
-#                 "color": "white"
-#            }
-#         }
-#         st.pydeck_chart(pdk.Deck(
-#             map_provider="mapbox", 
-#             map_style=pdk.map_styles.SATELLITE,
-#             tooltip=tooltip,
-#             initial_view_state=pdk.ViewState(
-#                 latitude=filtered_data["Latitude"].mean(),
-#                 longitude=filtered_data["Longitude"].mean(),
-#                 zoom=4,
-#                 pitch=50,
-#             ),
-#             layers=[
-#                 pdk.Layer(
-#                     "ScatterplotLayer",
-#                     data=filtered_data,
-#                     pickable=True,
-#                     opacity=0.3,
-#                     stroked=True,
-#                     filled=True,
-#                     radius_scale=10,
-#                     radius_min_pixels=10,
-#                     radius_max_pixels=100,
-#                     line_width_min_pixels=1,
-#                     get_position='[Longitude, Latitude]',
-#                     get_radius="Magnitude",
-#                     get_fill_color=[255, 140, 0],
-#                     get_line_color=[0, 0, 0],
+with right:
+    try:
+        tooltip = {
+           "html": "<b>Region:</b> {reg_name} <br /><b>Date:</b> {Time} <br /><b>Magnitude:</b> {Magnitude} <br /><b>Depth:</b> {Depth/Km} Km",
+           "style": {
+                "backgroundColor": "steelblue",
+                "color": "white"
+           }
+        }
+        st.pydeck_chart(pdk.Deck(
+            map_provider="mapbox", 
+            map_style=pdk.map_styles.SATELLITE,
+            tooltip=tooltip,
+            initial_view_state=pdk.ViewState(
+                latitude=filtered_data["Latitude"].mean(),
+                longitude=filtered_data["Longitude"].mean(),
+                zoom=4,
+                pitch=50,
+            ),
+            layers=[
+                pdk.Layer(
+                    "ScatterplotLayer",
+                    data=filtered_data,
+                    pickable=True,
+                    opacity=0.3,
+                    stroked=True,
+                    filled=True,
+                    radius_scale=10,
+                    radius_min_pixels=10,
+                    radius_max_pixels=100,
+                    line_width_min_pixels=1,
+                    get_position='[Longitude, Latitude]',
+                    get_radius="Magnitude",
+                    get_fill_color=[255, 140, 0],
+                    get_line_color=[0, 0, 0],
 
-#                 )
-#             ],
-#         ))
-#     except:
-#         st.error('No data', icon="🚨")
-#         st.stop()
+                )
+            ],
+        ))
+    except:
+        st.error('No data', icon="🚨")
+        st.stop()
         
 
