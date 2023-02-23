@@ -63,7 +63,7 @@ st.pydeck_chart(pdk.Deck(
             "ScatterplotLayer",
             data=filtered_data,
             pickable=True,
-            opacity=0.8,
+            opacity=0.3,
             stroked=True,
             filled=True,
             radius_scale=10,
