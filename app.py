@@ -56,19 +56,28 @@ def get_data():
         
 # st.dataframe(get_data())
 
-left, right = st.columns([1,3],gap="large")
+left, center, right = st.columns([1,2,3], gap="large")
 
 with left: 
     df = get_data()
 
     values_magnitude = st.slider('Magnitude',int(df.Magnitude.min()), int(df.Magnitude.max()), (int(df.Magnitude.min()), int(df.Magnitude.max())))
     values_deepness = st.slider('Depth/Km',int(df["Depth/Km"].min()), int(df["Depth/Km"].max()), (int(df["Depth/Km"].min()), int(df["Depth/Km"].max())))
-#     option = st.selectbox('Select variable',('Magnitude', 'Depth/Km'))
-
     magnitudo_mask = ((df["Magnitude"]>=values_magnitude[0]) & (df["Magnitude"]<=values_magnitude[1]))
     deepness_mask = ((df["Depth/Km"]>=values_deepness[0]) & (df["Depth/Km"]<=values_deepness[1]))
 
     filtered_data = df[magnitudo_mask & deepness_mask]
+    
+with center: 
+    source = filtered_data.groupby("reg_name",as_index=False).size()
+        chart = alt.Chart(source).mark_bar().encode(
+            x='size:Q',
+            y=alt.Y('reg_name:N', sort='-x')
+        )
+        
+        st.altair_chart(chart, use_container_width=True, theme="streamlit")
+        
+    
 
 with right:
     try:
@@ -89,20 +98,6 @@ with right:
                 zoom=4,
                 pitch=50,
             ),
-#             layers = [
-#                 pdk.Layer(
-#                     "ColumnLayer",
-#                     data=df,
-#                     get_elevation=option,
-#                     get_position='[Longitude, Latitude]',
-#                     elevation_scale=10,
-#                     pickable=True,
-#                     auto_highlight=True,
-#                     radius=2000,
-#                     color=[255, 140, 0],
-#                     opacity=0.3,
-#                 ),
-#             ]
             layers=[
                 pdk.Layer(
                     "ScatterplotLayer",
@@ -123,14 +118,6 @@ with right:
                 )
             ],
         ))
-        
-        source = filtered_data.groupby("reg_name",as_index=False).size()
-        chart = alt.Chart(source).mark_bar().encode(
-            x='size:Q',
-            y=alt.Y('reg_name:N', sort='-x')
-        )
-        
-        st.altair_chart(chart, use_container_width=True, theme="streamlit")
         
         
     except:
