@@ -33,8 +33,8 @@ def get_data():
     df_raw = pd.read_csv("https://webservices.ingv.it/fdsnws/event/1/query?starttime=2020-02-16T00%3A00%3A00&endtime=2023-02-23T23%3A59%3A59&minmag=2&maxmag=10&mindepth=-10&maxdepth=1000&minlat=35&maxlat=49&minlon=5&maxlon=20&minversion=100&orderby=time-asc&format=text&limit=10000",
                         sep="|")[['Time', 'Latitude', 'Longitude', 'Depth/Km', 'Magnitude']]
     df_raw["Time"] = df_raw["Time"].str.split("T",expand=True)[0]
-    df_raw["Magnitude"] = df_raw["Magnitude"].astype(float)
-    df_raw["Depth/Km"] = df_raw["Depth/Km"].astype(int)
+    df_raw["Magnitude"] = df_raw["Magnitude"].astype("float")
+    df_raw["Depth/Km"] = df_raw["Depth/Km"].astype("int")
     
     return  df_raw 
 
