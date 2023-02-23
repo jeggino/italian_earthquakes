@@ -86,25 +86,37 @@ with right:
                 zoom=4,
                 pitch=50,
             ),
-            layers=[
+            layers = [
                 pdk.Layer(
-                    "ScatterplotLayer",
-                    data=filtered_data,
-                    pickable=True,
-                    opacity=0.3,
-                    stroked=True,
-                    filled=True,
-                    radius_scale=10,
-                    radius_min_pixels=10,
-                    radius_max_pixels=100,
-                    line_width_min_pixels=1,
+                    "ColumnLayer",
+                    data=df,
+                    get_elevation="Magnitude",
                     get_position='[Longitude, Latitude]',
-                    get_radius="Magnitude",
-                    get_fill_color=[255, 140, 0],
-                    get_line_color=[0, 0, 0],
+                    elevation_scale=100,
+                    pickable=True,
+                    auto_highlight=True,
+                    radius=20000,
+                ),
+            ]
+#             layers=[
+#                 pdk.Layer(
+#                     "ScatterplotLayer",
+#                     data=filtered_data,
+#                     pickable=True,
+#                     opacity=0.3,
+#                     stroked=True,
+#                     filled=True,
+#                     radius_scale=10,
+#                     radius_min_pixels=10,
+#                     radius_max_pixels=100,
+#                     line_width_min_pixels=1,
+#                     get_position='[Longitude, Latitude]',
+#                     get_radius="Magnitude",
+#                     get_fill_color=[255, 140, 0],
+#                     get_line_color=[0, 0, 0],
 
-                )
-            ],
+#                 )
+#             ],
         ))
     except:
         st.error('No data', icon="🚨")
