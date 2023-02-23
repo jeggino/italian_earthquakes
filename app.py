@@ -120,6 +120,28 @@ with right_2:
             ],
         ))
         
+        st.pydeck_chart(pdk.Deck(
+            map_provider="mapbox", 
+            map_style=pdk.map_styles.SATELLITE,
+            initial_view_state=pdk.ViewState(
+                latitude=filtered_data["Latitude"].mean(),
+                longitude=filtered_data["Longitude"].mean(),
+                zoom=4,
+                pitch=50,
+            ),
+            layers=[
+                pdk.Layer(
+                    "HeatmapLayer",
+                    data=filtered_data,
+                    opacity=0.9,
+                    get_position=[Longitude, Latitude],
+                    threshold=0.75,
+                    aggregation=pdk.types.String("MEAN"),
+                    get_weight="weight",
+                    pickable=True,
+                )
+            ],
+        ))
         
     except:
         st.error('No data', icon="🚨")
