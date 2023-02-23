@@ -12,6 +12,8 @@ from shapely.geometry import Point
 import datetime
 from datetime import date
 
+import altair as alt
+
 import pydeck as pdk
 
 st.set_page_config(
