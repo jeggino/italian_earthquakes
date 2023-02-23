@@ -93,7 +93,7 @@ with right:
                     data=df,
                     get_elevation=option,
                     get_position='[Longitude, Latitude]',
-                    elevation_scale=10000,
+                    elevation_scale=10,
                     pickable=True,
                     auto_highlight=True,
                     radius=200,
