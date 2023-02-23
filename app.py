@@ -37,7 +37,7 @@ def get_data():
     df_raw["Depth/Km"] = df_raw["Depth/Km"].astype("int")
     
     return  df_raw 
-date = st.date_input(label, value=None, min_value=None, max_value=None, key=None, help=None, on_change=None, args=None, kwargs=None, *, disabled=False, label_visibility="visible")
+date = st.date_input(label, value=None, min_value=None, max_value=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
 st.write(str(date))
 
 left, right = st.columns([1,3],gap="large")
