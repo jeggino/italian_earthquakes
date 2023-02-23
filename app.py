@@ -56,22 +56,16 @@ def get_data():
         
 # st.dataframe(get_data())
 
-col_1,  col_3, col_4 = st.columns([2,3,3], gap="large")
 
-with col_1: 
-    df = get_data()
+df = get_data()
     
-with col_3:
+values_magnitude = st.sidebar.slider('Magnitude',int(df.Magnitude.min()), int(df.Magnitude.max()), (int(df.Magnitude.min()), int(df.Magnitude.max())))
+values_deepness = st.sidebar.slider('Depth/Km',int(df["Depth/Km"].min()), int(df["Depth/Km"].max()), (int(df["Depth/Km"].min()), int(df["Depth/Km"].max())))    
 
-    values_magnitude = st.slider('Magnitude',int(df.Magnitude.min()), int(df.Magnitude.max()), (int(df.Magnitude.min()), int(df.Magnitude.max())))
-    
-with col_4:
-    values_deepness = st.slider('Depth/Km',int(df["Depth/Km"].min()), int(df["Depth/Km"].max()), (int(df["Depth/Km"].min()), int(df["Depth/Km"].max())))    
+magnitudo_mask = ((df["Magnitude"]>=values_magnitude[0]) & (df["Magnitude"]<=values_magnitude[1]))
+deepness_mask = ((df["Depth/Km"]>=values_deepness[0]) & (df["Depth/Km"]<=values_deepness[1]))
 
-    magnitudo_mask = ((df["Magnitude"]>=values_magnitude[0]) & (df["Magnitude"]<=values_magnitude[1]))
-    deepness_mask = ((df["Depth/Km"]>=values_deepness[0]) & (df["Depth/Km"]<=values_deepness[1]))
-
-    filtered_data = df[magnitudo_mask & deepness_mask]
+filtered_data = df[magnitudo_mask & deepness_mask]
     
 left_2,  right_2 = st.columns([2,3], gap="large")
 
@@ -84,10 +78,6 @@ with left_2:
     )
 
     st.altair_chart(chart, use_container_width=True, theme="streamlit")
-    
-# with center: 
-    
-        
     
 
 with right_2:
