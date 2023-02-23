@@ -42,8 +42,8 @@ def get_data():
         df_municipalities = df_municipalities[['name','prov_name','reg_name','geometry']].rename(columns={'name':'mun_name'})
         
         #zip the coordinates into a point object and convert to a GeoData Frame
-        geometry = [Point(xy) for xy in zip(df.Longitude, df.Latitude,)]
-        geo_df = gpd.GeoDataFrame(df, geometry=geometry,crs="EPSG:4326")
+        geometry = [Point(xy) for xy in zip(df_raw.Longitude, df_raw.Latitude,)]
+        geo_df = gpd.GeoDataFrame(df_raw, geometry=geometry,crs="EPSG:4326")
 
         pointInPoly_municipalities = gpd.sjoin(geo_df, df_municipalities, op='within').reset_index(drop=True).drop_duplicates()
 
