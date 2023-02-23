@@ -28,13 +28,16 @@ footer {visibility: hidden;}
 @st.cache_data(experimental_allow_widgets=True)  # 👈 Set the parameter
 def get_data():
     
-    df_raw = pd.read_csv('Italian_Catalogue.csv')
-    values_magnitudo = st.slider(
-    'Magnitudo',
-    0.0, 6.2, (2.0, 5.0))
+    df_raw = df_raw.read_csv("https://webservices.ingv.it/fdsnws/event/1/query?starttime=2000-02-22T00%3A00%3A00&endtime=2023-02-23T23%3A59%3A59&minmag=2&maxmag=10&mindepth=-10&maxdepth=1000&minlat=-90&maxlat=90&minlon=-180&maxlon=180&minversion=100&orderby=time-asc&format=text&limit=10000",
+                 sep="|")[['Time', 'Latitude', 'Longitude', 'Depth/Km', 'Magnitude','EventLocationName']]
+    df_raw["Time"] = df["Time"].str.split("T",expand=True)[0]
+    
+    values_magnitude = st.slider(
+    'Magnitude',
+    0.0, 7, (2.0, 5.0))
     
     values_deepness = st.slider(
-    'Deepness',
+    'Depth/Km',
     0, 644, (0, 644))
     
     magnitudo_mask = ((df_raw["Magnitude"]>=values_magnitudo[0]) & (df_raw["Magnitude"]<=values_magnitudo[1]))
