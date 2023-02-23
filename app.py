@@ -59,7 +59,7 @@ with left:
 with right:
     try:
         tooltip = {
-           "html": "<b>Magnitude:</b> {Magnitude} <br /><b>Depth/Km:</b> {Depth/Km}",
+           "html": "<b>Magnitude:</b> {Magnitude} <br /><b>Depth:</b> {Depth/Km} Km",
            "style": {
                 "backgroundColor": "steelblue",
                 "color": "white"
