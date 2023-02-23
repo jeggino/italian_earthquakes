@@ -38,7 +38,7 @@ def get_data():
     
     return  df_raw 
 
-left, right = st.columns([1,3])
+left, right = st.columns([1,3],gap="large")
 
 with left: 
     df = get_data()
@@ -57,7 +57,7 @@ with right:
         initial_view_state=pdk.ViewState(
             latitude=filtered_data["Latitude"].mean(),
             longitude=filtered_data["Longitude"].mean(),
-            zoom=5,
+            zoom=4,
             pitch=50,
         ),
         layers=[
