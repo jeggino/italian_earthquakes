@@ -60,13 +60,20 @@ left,  right = st.columns([2,3], gap="large")
 
 with left: 
     df = get_data()
+    
+with right:
 
     values_magnitude = st.slider('Magnitude',int(df.Magnitude.min()), int(df.Magnitude.max()), (int(df.Magnitude.min()), int(df.Magnitude.max())))
-    values_deepness = st.slider('Depth/Km',int(df["Depth/Km"].min()), int(df["Depth/Km"].max()), (int(df["Depth/Km"].min()), int(df["Depth/Km"].max())))
+    values_deepness = st.slider('Depth/Km',int(df["Depth/Km"].min()), int(df["Depth/Km"].max()), (int(df["Depth/Km"].min()), int(df["Depth/Km"].max())))    
+
     magnitudo_mask = ((df["Magnitude"]>=values_magnitude[0]) & (df["Magnitude"]<=values_magnitude[1]))
     deepness_mask = ((df["Depth/Km"]>=values_deepness[0]) & (df["Depth/Km"]<=values_deepness[1]))
 
     filtered_data = df[magnitudo_mask & deepness_mask]
+    
+left_2,  right_2 = st.columns([2,3], gap="large")
+
+with left_2:
     
     source = filtered_data.groupby("reg_name",as_index=False).size()
     chart = alt.Chart(source).mark_bar().encode(
@@ -81,7 +88,7 @@ with left:
         
     
 
-with right:
+with right_2:
     try:
         tooltip = {
            "html": "<b>Region:</b> {reg_name} <br /><b>Province:</b> {prov_name} <br /><b>Municipality:</b> {mun_name} <br /><b>Date:</b> {Time} <br /><b>Magnitude:</b> {Magnitude} <br /><b>Depth:</b> {Depth/Km} Km",
