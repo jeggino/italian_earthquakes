@@ -37,8 +37,17 @@ def get_data():
         df_raw["Time"] = df_raw["Time"].str.split("T",expand=True)[0]
         df_raw["Magnitude"] = df_raw["Magnitude"].astype("float")
         df_raw["Depth/Km"] = df_raw["Depth/Km"].astype("int")
+        
+        df_municipalities = gpd.read_file('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_municipalities.geojson')
+        df_municipalities = df_municipalities[['name','prov_name','reg_name','geometry']].rename(columns={'name':'mun_name'})
+        
+        #zip the coordinates into a point object and convert to a GeoData Frame
+        geometry = [Point(xy) for xy in zip(df.Longitude, df.Latitude,)]
+        geo_df = gpd.GeoDataFrame(df, geometry=geometry,crs="EPSG:4326")
 
-        return  df_raw 
+        pointInPoly_municipalities = gpd.sjoin(geo_df, df_municipalities, op='within').reset_index(drop=True).drop_duplicates()
+
+        return  pointInPoly_municipalities[['Time', 'Latitude', 'Longitude', 'Depth/Km', 'Magnitude','mun_name','prov_name','reg_name']]
     except:
         st.error('Date input error', icon="🚨")
         st.stop()
@@ -59,7 +68,7 @@ with left:
 with right:
     try:
         tooltip = {
-           "html": "<b>Magnitude:</b> {Magnitude} <br /><b>Depth:</b> {Depth/Km} Km",
+           "html": "<b>Region:</b> {reg_name} <br /><b>Date:</b> {Time} <br /><b>Magnitude:</b> {Magnitude} <br /><b>Depth:</b> {Depth/Km} Km",
            "style": {
                 "backgroundColor": "steelblue",
                 "color": "white"
