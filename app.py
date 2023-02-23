@@ -81,71 +81,68 @@ with left:
     
 
 with center:
-    try:
-        tooltip = {
-           "html": "<b>Region:</b> {reg_name} <br /><b>Province:</b> {prov_name} <br /><b>Municipality:</b> {mun_name} <br /><b>Date:</b> {Time} <br /><b>Magnitude:</b> {Magnitude} <br /><b>Depth:</b> {Depth/Km} Km",
-           "style": {
-                "backgroundColor": "steelblue",
-                "color": "white"
-           }
-        }
-        st.pydeck_chart(pdk.Deck(
-            map_provider="mapbox", 
-            map_style=pdk.map_styles.SATELLITE,
-            tooltip=tooltip,
-            initial_view_state=pdk.ViewState(
-                latitude=filtered_data["Latitude"].mean(),
-                longitude=filtered_data["Longitude"].mean(),
-                zoom=4,
-                pitch=50,
-            ),
-            layers=[
-                pdk.Layer(
-                    "ScatterplotLayer",
-                    data=filtered_data,
-                    pickable=True,
-                    opacity=0.3,
-                    stroked=True,
-                    filled=True,
-                    radius_scale=10,
-                    radius_min_pixels=10,
-                    radius_max_pixels=100,
-                    line_width_min_pixels=1,
-                    get_position='[Longitude, Latitude]',
-                    get_radius="Magnitude",
-                    get_fill_color=[255, 140, 0],
-                    get_line_color=[0, 0, 0],
+    tooltip = {
+       "html": "<b>Region:</b> {reg_name} <br /><b>Province:</b> {prov_name} <br /><b>Municipality:</b> {mun_name} <br /><b>Date:</b> {Time} <br /><b>Magnitude:</b> {Magnitude} <br /><b>Depth:</b> {Depth/Km} Km",
+       "style": {
+            "backgroundColor": "steelblue",
+            "color": "white"
+       }
+    }
+    st.pydeck_chart(pdk.Deck(
+        map_provider="mapbox", 
+        map_style=pdk.map_styles.SATELLITE,
+        tooltip=tooltip,
+        initial_view_state=pdk.ViewState(
+            latitude=filtered_data["Latitude"].mean(),
+            longitude=filtered_data["Longitude"].mean(),
+            zoom=4,
+            pitch=50,
+        ),
+        layers=[
+            pdk.Layer(
+                "ScatterplotLayer",
+                data=filtered_data,
+                pickable=True,
+                opacity=0.3,
+                stroked=True,
+                filled=True,
+                radius_scale=10,
+                radius_min_pixels=10,
+                radius_max_pixels=100,
+                line_width_min_pixels=1,
+                get_position='[Longitude, Latitude]',
+                get_radius="Magnitude",
+                get_fill_color=[255, 140, 0],
+                get_line_color=[0, 0, 0],
 
-                )
-            ],
-        ))
+            )
+        ],
+    ))
     
-    with right:
-        st.pydeck_chart(pdk.Deck(
-            map_provider="mapbox", 
-            map_style=pdk.map_styles.SATELLITE,
-            initial_view_state=pdk.ViewState(
-                latitude=filtered_data["Latitude"].mean(),
-                longitude=filtered_data["Longitude"].mean(),
-                zoom=4,
-                pitch=50,
-            ),
-            layers=[
-                pdk.Layer(
-                    "HeatmapLayer",
-                    data=filtered_data,
-                    opacity=0.9,
-                    get_position='[Longitude, Latitude]',
-                    threshold=0.75,
-                    aggregation=pdk.types.String("MEAN"),
-                    get_weight="weight",
-                    pickable=True,
-                )
-            ],
-        ))
+with right:
+    st.pydeck_chart(pdk.Deck(
+        map_provider="mapbox", 
+        map_style=pdk.map_styles.SATELLITE,
+        initial_view_state=pdk.ViewState(
+            latitude=filtered_data["Latitude"].mean(),
+            longitude=filtered_data["Longitude"].mean(),
+            zoom=4,
+            pitch=50,
+        ),
+        layers=[
+            pdk.Layer(
+                "HeatmapLayer",
+                data=filtered_data,
+                opacity=0.9,
+                get_position='[Longitude, Latitude]',
+                threshold=0.75,
+                aggregation=pdk.types.String("MEAN"),
+                get_weight="weight",
+                pickable=True,
+            )
+        ],
+    ))
         
-    except:
-        st.error('No data', icon="🚨")
-        st.stop()
+    
         
 
