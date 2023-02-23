@@ -66,7 +66,6 @@ magnitudo_mask = ((df["Magnitude"]>=values_magnitude[0]) & (df["Magnitude"]<=val
 deepness_mask = ((df["Depth/Km"]>=values_deepness[0]) & (df["Depth/Km"]<=values_deepness[1]))
 
 filtered_data = df[magnitudo_mask & deepness_mask]
-"https://www.ing.nl/particulier/betaalverzoek/index.html?trxid=WZvack2Jq3lg7dM97EFKhnNUzvFLgZPI"
     
 left, center, right = st.columns([3,2,2], gap="large")
 
