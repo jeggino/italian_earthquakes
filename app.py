@@ -34,20 +34,20 @@ def get_data():
                         sep="|")[['Time', 'Latitude', 'Longitude', 'Depth/Km', 'Magnitude']]
     df_raw["Time"] = df_raw["Time"].str.split("T",expand=True)[0]
     
-#     values_magnitude = st.slider(
-#     'Magnitude',
-#     0.0, 7, (2.0, 5.0))
+    values_magnitude = st.slider(
+    'Magnitude',
+    0.0, 7, (2.0, 5.0))
     
-#     values_deepness = st.slider(
-#     'Depth/Km',
-#     0, 644, (0, 644))
+    values_deepness = st.slider(
+    'Depth/Km',
+    0, 644, (0, 644))
     
-#     magnitudo_mask = ((df_raw["Magnitude"]>=values_magnitudo[0]) & (df_raw["Magnitude"]<=values_magnitudo[1]))
-#     deepness_mask = ((df_raw["Depth/Km"]>=values_deepness[0]) & (df_raw["Depth/Km"]<=values_deepness[1]))
+    magnitudo_mask = ((df_raw["Magnitude"]>=values_magnitudo[0]) & (df_raw["Magnitude"]<=values_magnitudo[1]))
+    deepness_mask = ((df_raw["Depth/Km"]>=values_deepness[0]) & (df_raw["Depth/Km"]<=values_deepness[1]))
     
-#     filtered_data = df_raw[magnitudo_mask & deepness_mask]
+    filtered_data = df_raw[magnitudo_mask & deepness_mask]
     
-    return  df_raw 
+    return  filtered_data 
 
 st.pydeck_chart(pdk.Deck(
     map_style=None,
@@ -63,7 +63,7 @@ st.pydeck_chart(pdk.Deck(
            data=get_data(),
            get_position='[Longitude, Latitude]',
            radius=2000,
-           elevation_scale=4,
+           elevation_scale=10,
            elevation_range=[0, 1000],
            pickable=True,
            extruded=True,
