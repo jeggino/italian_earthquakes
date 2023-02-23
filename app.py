@@ -115,8 +115,7 @@ with center:
 
             )
         ],
-        use_container_width=True
-    ))
+    ), use_container_width=True)
     
 with right:
     st.pydeck_chart(pdk.Deck(
@@ -138,8 +137,7 @@ with right:
                 pickable=True,
             )
         ],
-        use_container_width=True
-    ))
+    ), use_container_width=True)
         
     
 
