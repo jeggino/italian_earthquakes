@@ -55,7 +55,7 @@ st.pydeck_chart(pdk.Deck(
     initial_view_state=pdk.ViewState(
         latitude=filtered_data["Latitude"].mean(),
         longitude=filtered_data["Longitude"].mean(),
-        zoom=7,
+        zoom=5,
         pitch=50,
     ),
     layers=[
