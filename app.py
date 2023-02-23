@@ -56,7 +56,7 @@ def get_data():
         
 # st.dataframe(get_data())
 
-left, center, right = st.columns([1,2,3], gap="large")
+left,  right = st.columns([2,3], gap="large")
 
 with left: 
     df = get_data()
@@ -68,7 +68,6 @@ with left:
 
     filtered_data = df[magnitudo_mask & deepness_mask]
     
-with center: 
     source = filtered_data.groupby("reg_name",as_index=False).size()
     chart = alt.Chart(source).mark_bar().encode(
         x='size:Q',
@@ -76,6 +75,9 @@ with center:
     )
 
     st.altair_chart(chart, use_container_width=True, theme="streamlit")
+    
+# with center: 
+    
         
     
 
