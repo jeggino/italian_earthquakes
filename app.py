@@ -79,8 +79,8 @@ with left_2:
     
     source = filtered_data.groupby("reg_name",as_index=False).size()
     chart = alt.Chart(source).mark_bar().encode(
-        x=alt.X('size:Q', axis=None),
-        y=alt.Y('reg_name:N', sort='-x', axis=None)
+        x=alt.X('size:Q', title=None),
+        y=alt.Y('reg_name:N', sort='-x', title=None)
     )
 
     st.altair_chart(chart, use_container_width=True, theme="streamlit")
