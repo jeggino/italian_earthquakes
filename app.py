@@ -58,7 +58,7 @@ def get_data():
 st.markdown("""
     <style>
         .stApp {
-        background: url("https://scontent-ams4-1.xx.fbcdn.net/v/t39.30808-6/333015533_1572885196531980_8715437076450417348_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=730e14&_nc_ohc=mAA8zxZ1kMUAX_yAqFd&_nc_ht=scontent-ams4-1.xx&oh=00_AfC051-9cYpVJQk5inqstbc6NTDwHZnSoC7LX6MsA0QYZw&oe=63FD3596");
+        background: url("https://th.bing.com/th/id/R.e6b3036960aca7aa74463f3248445d4e?rik=Pa126za3CImpJQ&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2f6%2f3%2fa%2f830914-earthquake-wallpapers-2197x1463-lockscreen.jpg&ehk=3qQRMr6YFUK1a%2fPHP6A6Rg0mc5y5Sm2PuIujOANK40I%3d&risl=&pid=ImgRaw&r=0");
         background-size: cover;
         }
     </style>""", unsafe_allow_html=True)
