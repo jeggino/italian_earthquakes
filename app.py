@@ -58,7 +58,7 @@ def get_data():
 st.markdown("""
     <style>
         .stApp {
-        background: url("depositphotos_184656884-stock-photo-lie-detector-or-seismograph-for.jpg");
+        background: url("https://th.bing.com/th/id/R.64f1f566faf570662bff19e57d195a11?rik=i%2fKpV4QRih5Ypg&riu=http%3a%2f%2f2.bp.blogspot.com%2f-Rjq-nK19Itk%2fVT-PewTX7WI%2fAAAAAAAAQ4U%2fW_Hef_0LPCA%2fs1600%2fEarthquake_Map.jpg&ehk=KJRTVRgAikkqTMp2gw5080Laay%2bFFEokPq4%2fc9SQ0GA%3d&risl=&pid=ImgRaw&r=0");
         background-size: cover;
         }
     </style>""", unsafe_allow_html=True)
