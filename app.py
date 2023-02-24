@@ -34,7 +34,7 @@ st.markdown(
             .sidebar .sidebar-content {{
                 width: 10px;
             }}
-            footer {visibility: hidden;}
+            footer {{visibility: hidden;}}
         </style>
     ''',
     unsafe_allow_html=True
