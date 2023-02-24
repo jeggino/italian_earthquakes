@@ -65,7 +65,7 @@ deepness_mask = ((df["Depth/Km"]>=values_deepness[0]) & (df["Depth/Km"]<=values_
 
 filtered_data = df[magnitudo_mask & deepness_mask]
     
-left, center, right = st.columns([3,2,2], gap="large")
+left,  right = st.columns([2,3], gap="large")
 
 with left:
     
@@ -78,7 +78,7 @@ with left:
     st.altair_chart(chart, use_container_width=True, theme="streamlit")
     
 
-with center:
+with right:
         
     tooltip = {
        "html": "<b>Region:</b> {reg_name} <br /><b>Province:</b> {prov_name} <br /><b>Municipality:</b> {mun_name} <br /><b>Date:</b> {Time} <br /><b>Magnitude:</b> {Magnitude} <br /><b>Depth:</b> {Depth/Km} Km",
