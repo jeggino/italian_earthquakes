@@ -84,7 +84,7 @@ with left:
         y=alt.Y('reg_name:N', sort='-x', title="Region")
     )
 
-    st.altair_chart(chart, use_container_width=True, theme="streamlit")
+    st.altair_chart(chart, use_container_width=True, theme=None)
     
 
 with right:
