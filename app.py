@@ -96,7 +96,7 @@ with right:
        }
     }
     
-    with st.expander("Maps", expanded=True):
+    with st.expander("🗺️", expanded=True):
         tab1, tab2 = st.tabs(["Points", "Heatmap"])
 
         tab1.pydeck_chart(pdk.Deck(
