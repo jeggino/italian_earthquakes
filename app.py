@@ -32,7 +32,7 @@ st.markdown(
     '''
         <style>
             .sidebar .sidebar-content {
-                width: 10px;
+                width: 5px;
             }
             footer {visibility: hidden;}
         </style>
