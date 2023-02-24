@@ -88,7 +88,7 @@ magnitudo_mask = ((df["Magnitude"]>=values_magnitude[0]) & (df["Magnitude"]<=val
 deepness_mask = ((df["Depth/Km"]>=values_deepness[0]) & (df["Depth/Km"]<=values_deepness[1]))
 filtered_data = df[magnitudo_mask & deepness_mask]
 
-left,  right = st.columns([2,3], gap="large")
+left,  right = st.columns([2,2], gap="medium")
 
 with left:
     source = filtered_data.groupby("reg_name",as_index=False).size()
@@ -106,7 +106,14 @@ with left:
 with right:
         
     tooltip = {
-       "html": "<b>Region:</b> {reg_name} <br /><b>Province:</b> {prov_name} <br /><b>Municipality:</b> {mun_name} <br /><b>Date:</b> {Time} <br /><b>Magnitude:</b> {Magnitude} <br /><b>Depth:</b> {Depth/Km} Km",
+       "html": """
+       <b>Region:</b> {reg_name} <br />
+        <b>Province:</b> {prov_name} <br />
+        <b>Municipality:</b> {mun_name} <br />
+        <b>Date:</b> {Time} <br />
+        <b>Magnitude:</b> {Magnitude} <br />
+        <b>Depth:</b> {Depth/Km} Km
+        """,
        "style": {
             "backgroundColor": "steelblue",
             "color": "white"
