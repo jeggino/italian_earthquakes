@@ -57,7 +57,7 @@ def get_data():
 
 st.image("depositphotos_184656884-stock-photo-lie-detector-or-seismograph-for.jpg")
 
-left,  right = st.columns([2,3], gap="small")
+left,  right = st.columns([2,3], gap="large")
 with left:
 
     df = get_data()
