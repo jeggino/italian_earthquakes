@@ -162,7 +162,7 @@ df = pd.DataFrame(
 
 st.dataframe(df, use_container_width=True)
 
-st.experimental_data_editor(df, key="data_editor",num_rows=”dynamic”) # 👈 Set a key
+st.experimental_data_editor(df, key="data_editor",num_rows="dynamic") # 👈 Set a key
 st.write("Here's the session state:")
 st.write(st.session_state["data_editor"]) # 👈 Access the edited data
         
