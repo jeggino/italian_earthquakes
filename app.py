@@ -79,6 +79,7 @@ with left:
     
 
 with center:
+        
     tooltip = {
        "html": "<b>Region:</b> {reg_name} <br /><b>Province:</b> {prov_name} <br /><b>Municipality:</b> {mun_name} <br /><b>Date:</b> {Time} <br /><b>Magnitude:</b> {Magnitude} <br /><b>Depth:</b> {Depth/Km} Km",
        "style": {
@@ -86,7 +87,7 @@ with center:
             "color": "white"
        }
     }
-    st.pydeck_chart(pdk.Deck(
+    st.expander("Points", expanded=True).pydeck_chart(pdk.Deck(
         map_provider="mapbox", 
         map_style="road",
         tooltip=tooltip,
@@ -117,8 +118,7 @@ with center:
         ],
     ), use_container_width=True)
     
-with right:
-    st.pydeck_chart(pdk.Deck(
+    st.expander("Heatmap", expanded=False).pydeck_chart(pdk.Deck(
         map_provider="mapbox", 
         map_style=pdk.map_styles.SATELLITE,
         initial_view_state=pdk.ViewState(
