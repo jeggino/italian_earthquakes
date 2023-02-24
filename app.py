@@ -58,7 +58,7 @@ def get_data():
 st.markdown("""
     <style>
         .stApp {
-        background: url("https://th.bing.com/th/id/R.b8312b8c396102324fa33743bcd174d2?rik=GcM8fE7vLY%2bjDA&riu=http%3a%2f%2fgetdrawings.com%2fimages%2fbroken-brick-wall-drawing-3.jpg&ehk=yfg%2bekgawV8jgwQf0xIvN0989of49Y4SRk2BaASf91A%3d&risl=&pid=ImgRaw&r=0");
+        background: url("https://scontent-ams4-1.xx.fbcdn.net/v/t39.30808-6/333015533_1572885196531980_8715437076450417348_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=730e14&_nc_ohc=mAA8zxZ1kMUAX_yAqFd&_nc_ht=scontent-ams4-1.xx&oh=00_AfC051-9cYpVJQk5inqstbc6NTDwHZnSoC7LX6MsA0QYZw&oe=63FD3596");
         background-size: cover;
         }
     </style>""", unsafe_allow_html=True)
