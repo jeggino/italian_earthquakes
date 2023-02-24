@@ -96,8 +96,11 @@ with left:
         x=alt.X('size:Q', title="Number of earthquakes"),
         y=alt.Y('reg_name:N', sort='-x', title="Region")
     )
+    
+    with st.expander("**Charts** 📊", expanded=True):
+        tab1, tab2 = st.tabs(["*Points*", "*Heatmap*"])
 
-    st.altair_chart(chart, use_container_width=True, theme=None)
+            tab1.altair_chart(chart, use_container_width=True, theme=None)
     
 
 with right:
@@ -110,7 +113,7 @@ with right:
        }
     }
     
-    with st.expander("**Map** 🗺️", expanded=True):
+    with st.expander("**Map** 🗺", expanded=True):
         tab1, tab2 = st.tabs(["*Points*", "*Heatmap*"])
 
         tab1.pydeck_chart(pdk.Deck(
