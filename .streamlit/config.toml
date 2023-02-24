@@ -1,6 +1,6 @@
 [theme]
 primaryColor="#ac27d1" # purple
-backgroundColor="#d4c7c7" #grey
 secondaryBackgroundColor="#d18727" #arange
+backgroundColor="#ebe6de" #grey
 textColor="#211e1e" #black
 font="monospace"
