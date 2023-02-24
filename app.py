@@ -55,7 +55,13 @@ def get_data():
         st.error('Date input error', icon="🚨")
         st.stop()
 
-st.image("depositphotos_184656884-stock-photo-lie-detector-or-seismograph-for.jpg")
+st.markdown("""
+    <style>
+        .stApp {
+        background: url("depositphotos_184656884-stock-photo-lie-detector-or-seismograph-for.jpg");
+        background-size: cover;
+        }
+    </style>""", unsafe_allow_html=True)
 
 left,  right = st.columns([2,3], gap="large")
 with left:
