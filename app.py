@@ -98,9 +98,9 @@ with left:
     )
     
     with st.expander("**Charts** 📊", expanded=True):
-        tab1, tab2 = st.tabs(["*Points*", "*Heatmap*"])
+        tab1, tab2 = st.tabs(["*Regions*", "*Provinces*"])
 
-            tab1.altair_chart(chart, use_container_width=True, theme=None)
+        tab1.altair_chart(chart, use_container_width=True, theme=None)
     
 
 with right:
