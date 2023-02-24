@@ -55,13 +55,13 @@ def get_data():
         st.error('Date input error', icon="🚨")
         st.stop()
 
-st.markdown("""
-    <style>
-        .stApp {
-        background: url("https://th.bing.com/th/id/R.e6b3036960aca7aa74463f3248445d4e?rik=Pa126za3CImpJQ&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2f6%2f3%2fa%2f830914-earthquake-wallpapers-2197x1463-lockscreen.jpg&ehk=3qQRMr6YFUK1a%2fPHP6A6Rg0mc5y5Sm2PuIujOANK40I%3d&risl=&pid=ImgRaw&r=0");
-        background-size: cover;
-        }
-    </style>""", unsafe_allow_html=True)
+# st.markdown("""
+#     <style>
+#         .stApp {
+#         background: url("https://th.bing.com/th/id/R.e6b3036960aca7aa74463f3248445d4e?rik=Pa126za3CImpJQ&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2f6%2f3%2fa%2f830914-earthquake-wallpapers-2197x1463-lockscreen.jpg&ehk=3qQRMr6YFUK1a%2fPHP6A6Rg0mc5y5Sm2PuIujOANK40I%3d&risl=&pid=ImgRaw&r=0");
+#         background-size: cover;
+#         }
+#     </style>""", unsafe_allow_html=True)
 
 left,  right = st.columns([2,3], gap="large")
 with left:
@@ -152,6 +152,20 @@ with right:
                 )
         ],
     ), use_container_width=True)
+        
+df = pd.DataFrame(
+    [
+        {"command": "st.selectbox", "rating": 4, "is_widget": True},
+        {"command": "st.balloons", "rating": 5, "is_widget": False},
+        {"command": "st.time_input", "rating": 3, "is_widget": True},
+    ]
+)
+
+st.dataframe(df, use_container_width=True)
+
+st.experimental_data_editor(df, key="data_editor") # 👈 Set a key
+st.write("Here's the session state:")
+st.write(st.session_state["data_editor"]) # 👈 Access the edited data
         
     
 
