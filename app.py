@@ -54,12 +54,12 @@ def get_data():
     except:
         st.error('Date input error', icon="🚨")
         st.stop()
-        
-left,  center, right = st.columns([1,2,3], gap="small")
-with left:
-    st.image("depositphotos_184656884-stock-photo-lie-detector-or-seismograph-for.jpg")
 
-with center:
+st.image("depositphotos_184656884-stock-photo-lie-detector-or-seismograph-for.jpg")
+
+left,  right = st.columns([2,3], gap="small")
+with left:
+
     df = get_data()
     left_1,  right_2 = st.columns([2,2], gap="medium")
 
