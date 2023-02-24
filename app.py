@@ -55,7 +55,7 @@ def get_data():
         st.error('Date input error', icon="🚨")
         st.stop()
         
-left,  center, right = st.columns([1,2,3], gap="large")
+left,  center, right = st.columns([1,2,3], gap="small")
 with left:
     st.image("depositphotos_184656884-stock-photo-lie-detector-or-seismograph-for.jpg")
 
