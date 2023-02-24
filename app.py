@@ -34,6 +34,8 @@ def get_data():
     try:
         progress_text = "Operation in progress. Please wait."
         my_bar = st.progress(0, text=progress_text)
+        for percent_complete in range(100):
+            my_bar.progress(percent_complete + 1, text=progress_text)
         col_1,col_2 = st.columns(2)
         starttime = col_1.date_input("Start time", value=datetime.date(2022, 7, 6), min_value=None, max_value=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
         endtime = col_2.date_input("End time", value=None, min_value=None, max_value=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
