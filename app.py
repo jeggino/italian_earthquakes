@@ -155,15 +155,14 @@ with right:
         
 df = pd.DataFrame(
     [
-        {"command": "st.selectbox", "rating": 4, "is_widget": True},
-        {"command": "st.balloons", "rating": 5, "is_widget": False},
-        {"command": "st.time_input", "rating": 3, "is_widget": True},
+        {"Name": "", "number": ,},
+       
     ]
 )
 
 st.dataframe(df, use_container_width=True)
 
-st.experimental_data_editor(df, key="data_editor") # 👈 Set a key
+st.experimental_data_editor(df, key="data_editor",num_rows=”dynamic”) # 👈 Set a key
 st.write("Here's the session state:")
 st.write(st.session_state["data_editor"]) # 👈 Access the edited data
         
