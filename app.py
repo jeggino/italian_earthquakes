@@ -152,21 +152,3 @@ with right:
                 )
         ],
     ), use_container_width=True)
-        
-df = pd.DataFrame(
-    [
-        {"Name": None, "number": None},
-       
-    ]
-)
-
-# st.dataframe(df, use_container_width=True)
-
-df_2 = st.experimental_data_editor(df, key="data_editor",num_rows="dynamic") # 👈 Set a key
-st.dataframe(df_2, use_container_width=True)
-# st.write("Here's the session state:")
-# st.write(st.session_state["data_editor"]) # 👈 Access the edited data
-        
-    
-
-
