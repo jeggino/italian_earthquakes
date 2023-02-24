@@ -76,7 +76,8 @@ with left:
     deepness_mask = ((df["Depth/Km"]>=values_deepness[0]) & (df["Depth/Km"]<=values_deepness[1]))
 
     filtered_data = df[magnitudo_mask & deepness_mask]
-
+    
+    "---"
     
     source = filtered_data.groupby("reg_name",as_index=False).size()
     chart = alt.Chart(source).mark_bar().encode(
@@ -127,6 +128,8 @@ with right:
             )
         ],
     ), use_container_width=True)
+    
+    "---"
 
     st.expander("Heatmap", expanded=False).pydeck_chart(pdk.Deck(
         map_provider="mapbox", 
