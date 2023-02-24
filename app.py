@@ -28,11 +28,17 @@ st.set_page_config(
 # footer {visibility: hidden;}
 # </style> """, unsafe_allow_html=True)
 
-st.markdown(f'''
-    <style>
-    section[data-testid="stSidebar"] .css-ng1t4o {{width: 14rem;}}
-    </style>
-''',unsafe_allow_html=True)
+st.markdown(
+    f'''
+        <style>
+            .sidebar .sidebar-content {{
+                width: 10px;
+            }}
+            footer {visibility: hidden;}
+        </style>
+    ''',
+    unsafe_allow_html=True
+)
 
 #---FUNCTIONS---
 @st.cache_data(experimental_allow_widgets=True)  # 👈 Set the parameter
