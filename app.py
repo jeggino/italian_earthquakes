@@ -23,10 +23,10 @@ st.set_page_config(
     
 )
 
-st.markdown(""" <style>
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
-</style> """, unsafe_allow_html=True)
+# st.markdown(""" <style>
+# #MainMenu {visibility: hidden;}
+# footer {visibility: hidden;}
+# </style> """, unsafe_allow_html=True)
 
 #---FUNCTIONS---
 @st.cache_data(experimental_allow_widgets=True)  # 👈 Set the parameter
