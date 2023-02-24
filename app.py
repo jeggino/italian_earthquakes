@@ -96,57 +96,60 @@ with right:
        }
     }
     
-    st.expander("Points", expanded=True).pydeck_chart(pdk.Deck(
-        map_provider="mapbox", 
-        map_style="road",
-        tooltip=tooltip,
-        initial_view_state=pdk.ViewState(
-            latitude=filtered_data["Latitude"].mean(),
-            longitude=filtered_data["Longitude"].mean(),
-            zoom=4,
-            pitch=50,
-        ),
-        layers=[
-            pdk.Layer(
-                "ScatterplotLayer",
-                data=filtered_data,
-                pickable=True,
-                opacity=0.3,
-                stroked=True,
-                filled=True,
-                radius_scale=10,
-                radius_min_pixels=10,
-                radius_max_pixels=100,
-                line_width_min_pixels=1,
-                get_position='[Longitude, Latitude]',
-                get_radius="Magnitude",
-                get_fill_color=[255, 140, 0],
-                get_line_color=[0, 0, 0],
+    with st.expander("Maps", expanded=True):
+        tab1, tab2 = st.tabs(["Points", "Heatmap"])
 
-            )
-        ],
-    ), use_container_width=True)
-    
-    "---"
+        tab1.pydeck_chart(pdk.Deck(
+            map_provider="mapbox", 
+            map_style="road",
+            tooltip=tooltip,
+            initial_view_state=pdk.ViewState(
+                latitude=filtered_data["Latitude"].mean(),
+                longitude=filtered_data["Longitude"].mean(),
+                zoom=4,
+                pitch=50,
+            ),
+            layers=[
+                pdk.Layer(
+                    "ScatterplotLayer",
+                    data=filtered_data,
+                    pickable=True,
+                    opacity=0.3,
+                    stroked=True,
+                    filled=True,
+                    radius_scale=10,
+                    radius_min_pixels=10,
+                    radius_max_pixels=100,
+                    line_width_min_pixels=1,
+                    get_position='[Longitude, Latitude]',
+                    get_radius="Magnitude",
+                    get_fill_color=[255, 140, 0],
+                    get_line_color=[0, 0, 0],
 
-    st.expander("Heatmap", expanded=False).pydeck_chart(pdk.Deck(
-        map_provider="mapbox", 
-        map_style=pdk.map_styles.SATELLITE,
-        initial_view_state=pdk.ViewState(
-            latitude=filtered_data["Latitude"].mean(),
-            longitude=filtered_data["Longitude"].mean(),
-            zoom=2,
-            pitch=0,
-        ),
-        layers=[
-            pdk.Layer(
-                "HeatmapLayer",
-                data=filtered_data,
-                opacity=1,
-                threshold=1,
-                get_position='[Longitude, Latitude]',
-                pickable=True,
-            )
+                )
+            ],
+        ), use_container_width=True)
+
+        "---"
+
+        tab2.pydeck_chart(pdk.Deck(
+            map_provider="mapbox", 
+            map_style=pdk.map_styles.SATELLITE,
+            initial_view_state=pdk.ViewState(
+                latitude=filtered_data["Latitude"].mean(),
+                longitude=filtered_data["Longitude"].mean(),
+                zoom=2,
+                pitch=0,
+            ),
+            layers=[
+                pdk.Layer(
+                    "HeatmapLayer",
+                    data=filtered_data,
+                    opacity=1,
+                    threshold=1,
+                    get_position='[Longitude, Latitude]',
+                    pickable=True,
+                )
         ],
     ), use_container_width=True)
         
