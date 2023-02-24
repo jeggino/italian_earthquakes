@@ -58,7 +58,7 @@ def get_data():
 st.markdown("""
     <style>
         .stApp {
-        background: url("https://journals.lib.unb.ca/journalimages/GEOCAN/2006/Vol_33/No_04/geocan33_4ser01_fig2.jpg");
+        background: url("https://th.bing.com/th/id/R.b8312b8c396102324fa33743bcd174d2?rik=GcM8fE7vLY%2bjDA&riu=http%3a%2f%2fgetdrawings.com%2fimages%2fbroken-brick-wall-drawing-3.jpg&ehk=yfg%2bekgawV8jgwQf0xIvN0989of49Y4SRk2BaASf91A%3d&risl=&pid=ImgRaw&r=0");
         background-size: cover;
         }
     </style>""", unsafe_allow_html=True)
