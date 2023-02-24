@@ -58,7 +58,7 @@ def get_data():
 st.markdown("""
     <style>
         .stApp {
-        background: url("https://th.bing.com/th/id/R.88d75b9e360fba7e4a1505c78ba408a9?rik=iqVF8EMSb8KaCg&riu=http%3a%2f%2fwww.worksheeto.com%2fpostpic%2f2012%2f07%2fearthquakes-and-volcanoes-worksheets_236514.jpg&ehk=SC2b7cYvm6AFtHG9SG1lMIQNzj5zJhzxsOHArfT9o9k%3d&risl=&pid=ImgRaw&r=0);
+        background: url("https://journals.lib.unb.ca/journalimages/GEOCAN/2006/Vol_33/No_04/geocan33_4ser01_fig2.jpg");
         background-size: cover;
         }
     </style>""", unsafe_allow_html=True)
