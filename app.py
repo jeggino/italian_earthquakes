@@ -155,7 +155,7 @@ with right:
         
 df = pd.DataFrame(
     [
-        {"Name": "", "number": ,},
+        {"Name": None, "number": None},
        
     ]
 )
