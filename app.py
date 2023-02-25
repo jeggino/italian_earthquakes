@@ -227,7 +227,7 @@ with right:
 #         #fullscreen
 #         folium.plugins.Fullscreen(position='topleft', title='Full Screen', title_cancel='Exit Full Screen', force_separate_button=True,).add_to(m)
 
-        tab3.st_folium(m)
+        st_folium(m)
     
     
                              
