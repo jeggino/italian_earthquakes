@@ -170,8 +170,6 @@ with right:
             ],
         ), use_container_width=True)
 
-        "---"
-
         tab2.pydeck_chart(pdk.Deck(
             map_provider="mapbox", 
             map_style=pdk.map_styles.SATELLITE,
