@@ -144,8 +144,8 @@ with right:
             map_style="road",
             tooltip=tooltip,
             initial_view_state=pdk.ViewState(
-                latitude=filtered_data["Latitude"].mean(),
-                longitude=filtered_data["Latitude"].mean(),
+                latitude=41.902782, 
+                longitude=12.496366,
                 zoom=4,
                 pitch=50,
             ),
