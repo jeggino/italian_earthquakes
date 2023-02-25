@@ -208,7 +208,7 @@ with right:
         from folium.plugins import Fullscreen,HeatMapWithTime,MiniMap
 
 
-        m = folium.Map(location=[filtered_data["Latitude"].mean(), filtered_data["Latitude"].mean()],
+        m = folium.Map(location=[filtered_data["Latitude"].mean(),filtered_data["Latitude"].mean()],
                        zoom_start=6,  
                      
                       )
@@ -226,9 +226,10 @@ with right:
                         ).add_to(m)
 
         #fullscreen
-#         folium.plugins.Fullscreen(position='topleft', title='Full Screen', title_cancel='Exit Full Screen', force_separate_button=True,).add_to(m)
-        with tab3:
-            folium_static(m)
+        folium.plugins.Fullscreen(position='topleft', title='Full Screen', title_cancel='Exit Full Screen', force_separate_button=True,).add_to(m)
+        
+#         with tab3:
+        tab3.folium_static(m)
     
     
                              
