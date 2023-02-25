@@ -189,46 +189,46 @@ with right:
                     pickable=True,
                 )
         ],
-    ), use_container_width=True)
+        ), use_container_width=True)
     
-    #---TIMELAPSE---
-    df_HeatMap = filtered_data[['Time', 'Latitude', 'Longitude']].sort_values('Time').reset_index(drop=True)
-    df_HeatMap['Time'] = df_HeatMap['Time'].astype(str)
-    
-    lat_long_list = []
-    for i in df_HeatMap.Time.unique():
-        temp=[]
-        for index, instance in df_HeatMap[df_HeatMap['Time'] == i].iterrows():
-            temp.append([instance['Latitude'],instance['Longitude']])
-        lat_long_list.append(temp)
-    
-    import folium
-    from folium import Figure
-    from folium.plugins import Fullscreen,HeatMapWithTime,MiniMap
+        #---TIMELAPSE---
+        df_HeatMap = filtered_data[['Time', 'Latitude', 'Longitude']].sort_values('Time').reset_index(drop=True)
+        df_HeatMap['Time'] = df_HeatMap['Time'].astype(str)
+
+        lat_long_list = []
+        for i in df_HeatMap.Time.unique():
+            temp=[]
+            for index, instance in df_HeatMap[df_HeatMap['Time'] == i].iterrows():
+                temp.append([instance['Latitude'],instance['Longitude']])
+            lat_long_list.append(temp)
+
+        import folium
+        from folium import Figure
+        from folium.plugins import Fullscreen,HeatMapWithTime,MiniMap
 
 
-    m = folium.Map(location=[filtered_data["Latitude"].mean(), filtered_data["Latitude"].mean()],
-                   zoom_start=6,  
-                   tiles='cartodbdark_matter',
-                   attr='&copy'
-                  )
+        m = folium.Map(location=[filtered_data["Latitude"].mean(), filtered_data["Latitude"].mean()],
+                       zoom_start=6,  
+                       tiles='cartodbdark_matter',
+                       attr='&copy'
+                      )
 
 
-    HeatMapWithTime(lat_long_list,
-                    index=df_HeatMap.Time.unique().tolist(),
-                    name='heatmap',
-                    overlay=False,
-                    radius=15,
-                    auto_play=True,
-                    speed_step=1,
-                    position='bottomright',
-                    display_index=True
-                    ).add_to(m)
+        HeatMapWithTime(lat_long_list,
+                        index=df_HeatMap.Time.unique().tolist(),
+                        name='heatmap',
+                        overlay=False,
+                        radius=15,
+                        auto_play=True,
+                        speed_step=1,
+                        position='bottomright',
+                        display_index=True
+                        ).add_to(m)
 
-    #fullscreen
-    folium.plugins.Fullscreen(position='topleft', title='Full Screen', title_cancel='Exit Full Screen', force_separate_button=True,).add_to(m)
-                             
-    tab3.st_folium(m)
+        #fullscreen
+        folium.plugins.Fullscreen(position='topleft', title='Full Screen', title_cancel='Exit Full Screen', force_separate_button=True,).add_to(m)
+
+        tab3.st_folium(m)
     
     
                              
