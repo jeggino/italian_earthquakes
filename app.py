@@ -202,10 +202,8 @@ with right:
                 temp.append([instance['Latitude'],instance['Longitude']])
             lat_long_list.append(temp)
 
-        m = folium.Map(location=[41.902782, 12.496366]],
-                       zoom_start=5,  
-                     
-                      )
+        m = folium.Map(location=[41.902782, 12.496366],
+                       zoom_start=5)
 
 
         HeatMapWithTime(lat_long_list,
