@@ -200,10 +200,6 @@ with right:
     from folium.plugins import Fullscreen,HeatMapWithTime,MiniMap
 
 
-    # create a map
-    centroid = filtered_data.centroid
-
-
     m = folium.Map(location=[filtered_data["Latitude"].mean(), filtered_data["Latitude"].mean()],
                    zoom_start=6,  
                    tiles='cartodbdark_matter',
