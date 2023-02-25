@@ -203,13 +203,8 @@ with right:
                 temp.append([instance['Latitude'],instance['Longitude']])
             lat_long_list.append(temp)
 
-        import folium
-        from folium import Figure
-        from folium.plugins import Fullscreen,HeatMapWithTime,MiniMap
-
-
-        m = folium.Map(location=[filtered_data["Latitude"].mean(),filtered_data["Latitude"].mean()],
-                       zoom_start=6,  
+        m = folium.Map(location=[41.902782, 12.496366].mean()],
+                       zoom_start=5,  
                      
                       )
 
