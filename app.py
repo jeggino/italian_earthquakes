@@ -196,7 +196,7 @@ with right:
     df_HeatMap['Time'] = df_HeatMap['Time'].astype(str)
     
     lat_long_list = []
-    for i in df_HeatMap.date.unique():
+    for i in df_HeatMap.Time.unique():
         temp=[]
         for index, instance in df_HeatMap[df_HeatMap['Time'] == i].iterrows():
             temp.append([instance['Latitude'],instance['Longitude']])
