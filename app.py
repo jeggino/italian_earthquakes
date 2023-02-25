@@ -214,19 +214,19 @@ with right:
                       )
 
 
-        HeatMapWithTime(lat_long_list,
-                        index=df_HeatMap.Time.unique().tolist(),
-                        name='heatmap',
-                        overlay=False,
-                        radius=15,
-                        auto_play=True,
-                        speed_step=1,
-                        position='bottomright',
-                        display_index=True
-                        ).add_to(m)
+#         HeatMapWithTime(lat_long_list,
+#                         index=df_HeatMap.Time.unique().tolist(),
+#                         name='heatmap',
+#                         overlay=False,
+#                         radius=15,
+#                         auto_play=True,
+#                         speed_step=1,
+#                         position='bottomright',
+#                         display_index=True
+#                         ).add_to(m)
 
-        #fullscreen
-        folium.plugins.Fullscreen(position='topleft', title='Full Screen', title_cancel='Exit Full Screen', force_separate_button=True,).add_to(m)
+#         #fullscreen
+#         folium.plugins.Fullscreen(position='topleft', title='Full Screen', title_cancel='Exit Full Screen', force_separate_button=True,).add_to(m)
 
         tab3.st_folium(m)
     
