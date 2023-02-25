@@ -204,7 +204,8 @@ with right:
     centroid = filtered_data.centroid
 
 
-    m = folium.Map(location=[filtered_data["Latitude"].mean(), filtered_data["Latitude"].mean(), zoom_start=6,  
+    m = folium.Map(location=[filtered_data["Latitude"].mean(), filtered_data["Latitude"].mean()],
+                   zoom_start=6,  
                    tiles='cartodbdark_matter',
                    attr='&copy'
                   )
