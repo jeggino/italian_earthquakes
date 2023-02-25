@@ -188,7 +188,7 @@ with right:
                     get_position='[Longitude, Latitude]',
                     pickable=True,
                 )
-        ],
+            ],
         ), use_container_width=True)
     
         #---TIMELAPSE---
@@ -209,8 +209,7 @@ with right:
 
         m = folium.Map(location=[filtered_data["Latitude"].mean(), filtered_data["Latitude"].mean()],
                        zoom_start=6,  
-                       tiles='cartodbdark_matter',
-                       attr='&copy'
+                     
                       )
 
 
