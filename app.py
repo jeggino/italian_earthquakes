@@ -195,6 +195,13 @@ with right:
     df_HeatMap = filtered_data[['Time', 'Latitude', 'Longitude']].sort_values('Time').reset_index(drop=True)
     df_HeatMap['Time'] = df_HeatMap['Time'].astype(str)
     
+    lat_long_list = []
+    for i in df_HeatMap.date.unique():
+        temp=[]
+        for index, instance in df_HeatMap[df_HeatMap['Time'] == i].iterrows():
+            temp.append([instance['Latitude'],instance['Longitude']])
+        lat_long_list.append(temp)
+    
     import folium
     from folium import Figure
     from folium.plugins import Fullscreen,HeatMapWithTime,MiniMap
