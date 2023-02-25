@@ -100,13 +100,13 @@ with left:
     source_2 = filtered_data.groupby("prov_name",as_index=False).size()
     chart_2 = alt.Chart(source_2).mark_bar().encode(
         x=alt.X('size:Q', title="Number of earthquakes"),
-        y=alt.Y('reg_name:N', sort='-x', title="Region")
+        y=alt.Y('prov_name:N', sort='-x', title="Provinces")
     )
     
-    sourc_3 = filtered_data.groupby("reg_name",as_index=False).size()
+    sourc_3 = filtered_data.groupby("mun_name",as_index=False).size()
     chart_3 = alt.Chart(sourc_3).mark_bar().encode(
         x=alt.X('size:Q', title="Number of earthquakes"),
-        y=alt.Y('reg_name:N', sort='-x', title="Region")
+        y=alt.Y('mun_name:N', sort='-x', title="Municipalities")
     )
     
     with st.expander("**Charts** 📊", expanded=True):
@@ -114,7 +114,7 @@ with left:
 
         tab1.altair_chart(chart_1, use_container_width=True, theme=None)
         tab2.altair_chart(chart_2, use_container_width=True, theme=None)
-        tab2.altair_chart(chart_3, use_container_width=True, theme=None)
+        tab3.altair_chart(chart_3, use_container_width=True, theme=None)
     
 
 with right:
