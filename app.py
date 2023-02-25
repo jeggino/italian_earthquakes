@@ -192,8 +192,8 @@ with right:
     ), use_container_width=True)
     
     #---TIMELAPSE---
-    df_HeatMap = filtered_data[['date', 'Latitude', 'Longitude']].sort_values('date').reset_index(drop=True)
-    df_HeatMap['date'] = df_HeatMap['date'].astype(str)
+    df_HeatMap = filtered_data[['Time', 'Latitude', 'Longitude']].sort_values('Time').reset_index(drop=True)
+    df_HeatMap['Time'] = df_HeatMap['Time'].astype(str)
     
     import folium
     from folium import Figure
