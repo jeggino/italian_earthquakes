@@ -97,13 +97,13 @@ with left:
         y=alt.Y('reg_name:N', sort='-x', title="Region")
     )
     
-    source_2 = filtered_data.groupby("prov_name",as_index=False).size()
+    source_2 = filtered_data.groupby("prov_name",as_index=False).size().sort_values("size",ascending=False).reset_index(drop=True)[:20]
     chart_2 = alt.Chart(source_2).mark_bar().encode(
         x=alt.X('size:Q', title="Number of earthquakes"),
         y=alt.Y('prov_name:N', sort='-x', title="Provinces")
     )
     
-    sourc_3 = filtered_data.groupby("mun_name",as_index=False).size()
+    sourc_3 = filtered_data.groupby("mun_name",as_index=False).size().sort_values("size",ascending=False).reset_index(drop=True)[:20]
     chart_3 = alt.Chart(sourc_3).mark_bar().encode(
         x=alt.X('size:Q', title="Number of earthquakes"),
         y=alt.Y('mun_name:N', sort='-x', title="Municipalities")
