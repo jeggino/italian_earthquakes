@@ -91,16 +91,30 @@ filtered_data = df[magnitudo_mask & deepness_mask]
 left,  right = st.columns([2,2], gap="medium")
 
 with left:
-    source = filtered_data.groupby("reg_name",as_index=False).size()
-    chart = alt.Chart(source).mark_bar().encode(
+    source_1 = filtered_data.groupby("reg_name",as_index=False).size()
+    chart_1 = alt.Chart(source_1).mark_bar().encode(
+        x=alt.X('size:Q', title="Number of earthquakes"),
+        y=alt.Y('reg_name:N', sort='-x', title="Region")
+    )
+    
+    source_2 = filtered_data.groupby("prov_name",as_index=False).size()
+    chart_2 = alt.Chart(source_2).mark_bar().encode(
+        x=alt.X('size:Q', title="Number of earthquakes"),
+        y=alt.Y('reg_name:N', sort='-x', title="Region")
+    )
+    
+    sourc_3 = filtered_data.groupby("reg_name",as_index=False).size()
+    chart_3 = alt.Chart(sourc_3).mark_bar().encode(
         x=alt.X('size:Q', title="Number of earthquakes"),
         y=alt.Y('reg_name:N', sort='-x', title="Region")
     )
     
     with st.expander("**Charts** 📊", expanded=True):
-        tab1, tab2 = st.tabs(["*Regions*", "*Provinces*"])
+        tab1, tab2, tab3 = st.tabs(["*Regions*", "*Provinces*", "*Municipalities*"])
 
-        tab1.altair_chart(chart, use_container_width=True, theme=None)
+        tab1.altair_chart(chart_1, use_container_width=True, theme=None)
+        tab2.altair_chart(chart_2, use_container_width=True, theme=None)
+        tab2.altair_chart(chart_3, use_container_width=True, theme=None)
     
 
 with right:
