@@ -194,7 +194,6 @@ with right:
         #---TIMELAPSE---
         df_HeatMap = filtered_data[['Time', 'Latitude', 'Longitude']].sort_values('Time').reset_index(drop=True)
         df_HeatMap['Time'] = df_HeatMap['Time'].astype(str)
-        st.dataframe(df_HeatMap)
 
         lat_long_list = []
         for i in df_HeatMap.Time.unique():
@@ -203,7 +202,7 @@ with right:
                 temp.append([instance['Latitude'],instance['Longitude']])
             lat_long_list.append(temp)
 
-        m = folium.Map(location=[41.902782, 12.496366].mean()],
+        m = folium.Map(location=[41.902782, 12.496366]],
                        zoom_start=5,  
                      
                       )
