@@ -137,7 +137,7 @@ with right:
     }
     
     with st.expander("**Map** 🗺", expanded=True):
-        tab1, tab2 = st.tabs(["*Points*", "*Heatmap*"])
+        tab1, tab2, tab3 = st.tabs(["*Points*", "*Heatmap*", "*Timelapse heatmap*"])
 
         tab1.pydeck_chart(pdk.Deck(
             map_provider="mapbox", 
@@ -145,7 +145,7 @@ with right:
             tooltip=tooltip,
             initial_view_state=pdk.ViewState(
                 latitude=filtered_data["Latitude"].mean(),
-                longitude=filtered_data["Longitude"].mean(),
+                longitude=filtered_data["Latitude"].mean(),
                 zoom=4,
                 pitch=50,
             ),
@@ -190,4 +190,44 @@ with right:
                 )
         ],
     ), use_container_width=True)
+    
+    #---TIMELAPSE---
+    df_HeatMap = filtered_data[['date', 'Latitude', 'Longitude']].sort_values('date').reset_index(drop=True)
+    df_HeatMap['date'] = df_HeatMap['date'].astype(str)
+    
+    import folium
+    from folium import Figure
+    from folium.plugins import Fullscreen,HeatMapWithTime,MiniMap
+
+
+    # create a map
+    centroid = filtered_data.centroid
+
+
+    m = folium.Map(location=[filtered_data["Latitude"].mean(), filtered_data["Latitude"].mean(), zoom_start=6,  
+                   tiles='cartodbdark_matter',
+                   attr='&copy'
+                  )
+
+
+    HeatMapWithTime(lat_long_list,
+                    index=df_HeatMap.date.unique().tolist(),
+                    name='heatmap',
+                    overlay=False,
+                    radius=15,
+                    auto_play=True,
+                    speed_step=1,
+                    position='bottomright',
+                    display_index=True
+                    ).add_to(m)
+
+    #fullscreen
+    folium.plugins.Fullscreen(position='topleft', title='Full Screen', title_cancel='Exit Full Screen', force_separate_button=True,).add_to(m)
+                             
+    tab3.st_folium(m)
+    
+    
+                             
+                             
+
         
