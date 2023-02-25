@@ -3,7 +3,7 @@ from streamlit_option_menu import option_menu
 
 import folium
 from folium.plugins import Fullscreen,HeatMapWithTime,MiniMap
-from streamlit_folium import st_folium
+from streamlit_folium import st_folium,folium_static 
 
 import pandas as pd
 import geopandas as gpd
