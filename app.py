@@ -215,7 +215,7 @@ with right:
 
 
     HeatMapWithTime(lat_long_list,
-                    index=df_HeatMap.date.unique().tolist(),
+                    index=df_HeatMap.Time.unique().tolist(),
                     name='heatmap',
                     overlay=False,
                     radius=15,
