@@ -114,7 +114,9 @@ with left:
 
         tab1.altair_chart(chart_1, use_container_width=True, theme=None)
         tab2.altair_chart(chart_2, use_container_width=True, theme=None)
+        tab2.caption('This is a string that explains something above.')
         tab3.altair_chart(chart_3, use_container_width=True, theme=None)
+        tab3.caption('This is a string that explains something above.')
     
 
 with right:
