@@ -194,6 +194,7 @@ with right:
         #---TIMELAPSE---
         df_HeatMap = filtered_data[['Time', 'Latitude', 'Longitude']].sort_values('Time').reset_index(drop=True)
         df_HeatMap['Time'] = df_HeatMap['Time'].astype(str)
+        st.dataframe(df_HeatMap)
 
         lat_long_list = []
         for i in df_HeatMap.Time.unique():
