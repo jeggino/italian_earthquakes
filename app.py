@@ -136,7 +136,7 @@ with right:
        }
     }
     
-    with st.expander("**Map** 🗺", expanded=True):
+    with st.expander("**Map** 🌍", expanded=True):
         tab1, tab2, tab3 = st.tabs(["*Points*", "*Heatmap*", "*Timelapse heatmap*"])
 
         tab1.pydeck_chart(pdk.Deck(
@@ -221,7 +221,7 @@ with right:
         folium.plugins.Fullscreen(position='topleft', title='Full Screen', title_cancel='Exit Full Screen', force_separate_button=True,).add_to(m)
         
         with tab3:
-            folium_static(m,use_container_width=True)
+            folium_static(m)
     
     
                              
