@@ -46,7 +46,7 @@ from streamlit_chat import message
 message("Welcome to Streamlit-Chat")
 
 if "message_history" not in st.session_state:
-    st.session_state.message_history = "ciao"
+    st.session_state.message_history = None
 
 for message_ in st.session_state.message_history:
     message(message_,is_user=True) # display all the previous message
