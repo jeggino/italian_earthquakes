@@ -223,9 +223,3 @@ with st.container():
 
         with tab3:
             folium_static(m)
-    
-    
-                             
-                             
-
-        
