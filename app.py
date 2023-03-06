@@ -41,6 +41,16 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+from streamlit_chat import message
+
+placeholder = st.empty()
+input_ = st.text_input("you:")
+message_history.append(input_)
+
+with placeholder.container():
+    for message_ in message_history:
+        message(message_)
+
 #---FUNCTIONS---
 @st.cache_data(experimental_allow_widgets=True)  # 👈 Set the parameter
 def get_data():
