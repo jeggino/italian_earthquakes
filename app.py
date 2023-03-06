@@ -48,7 +48,7 @@ from streamlit_chat import message
 
 message("Welcome to Streamlit-Chat")
 
-if ‘message_history’ not in st.session_state:
+if 'message_history' not in st.session_state:
     st.session_state.message_history = " "
 
 for message_ in st.session_state.message_history:
