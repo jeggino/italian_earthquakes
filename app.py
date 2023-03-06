@@ -43,7 +43,7 @@ st.markdown(
 
 from streamlit_chat import message
 
-message(“Welcome to Streamlit-Chat”)
+message("Welcome to Streamlit-Chat")
 
 if "message_history" not in st.session_state:
     st.session_state.message_history = 
