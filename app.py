@@ -52,7 +52,7 @@ for message_ in st.session_state.message_history:
     message(message_,is_user=True) # display all the previous message
 
 placeholder = st.empty() # placeholder for latest message
-input_ = st.text_input(“you”)
+input_ = st.text_input("you")
 st.session_state.message_history.append(input_)
 
 with placeholder.container():
