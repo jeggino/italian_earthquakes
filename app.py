@@ -35,7 +35,7 @@ st.markdown(
                 width: 5px;
             }
             footer {visibility: hidden;}
-            #MainMenu {visibility: hidden;}
+            
         </style>
     ''',
     unsafe_allow_html=True
