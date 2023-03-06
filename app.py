@@ -19,7 +19,7 @@ import pydeck as pdk
 st.set_page_config(
     page_title="Italian Earthquakes",
     page_icon="🌍",
-    layout="centered",
+    layout="wide",
     
 )
 
