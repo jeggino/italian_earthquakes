@@ -85,7 +85,7 @@ with st.container():
     df = get_data()    
     today = date.today()
     years10  =date(today.year - 5, today.month, today.day)
-    starttime = st.sidebar.date_input("**Start time**", value=None, 
+    starttime = st.sidebar.date_input("**Start time**", value=date(date.today().year, date.today().month, date.today().day-1), 
                                       min_value=datetime.strptime(df.Time.min(),'%Y-%m-%d'), 
                                       max_value=date.today(), label_visibility="visible")
     endtime = st.sidebar.date_input("**End time**", value=None, 
