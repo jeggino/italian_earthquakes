@@ -134,6 +134,12 @@ if selected == "Statistics":
         x=alt.X('size:Q', title="Number of earthquakes"),
         y=alt.Y('mun_name:N', sort='-x', title="Municipalities")
     )
+    
+    sourc_4 = filtered_data
+    chart_4 = alt.Chart(sourc_4).mark_boxplot(extent='min-max').encode(
+        x='reg_name:N',
+        y='Depth/Km:Q'
+    )
 
     with st.expander("**Charts** 📊", expanded=True):
         tab1, tab2, tab3 = st.tabs(["*Regions*", "*Provinces*", "*Municipalities*"])
@@ -143,6 +149,10 @@ if selected == "Statistics":
         tab2.caption('This is a string that explains something above.')
         tab3.altair_chart(chart_3, use_container_width=True, theme=None)
         tab3.caption('This is a string that explains something above.')
+    
+    st.altair_chart(chart_4, use_container_width=True, theme=None)
+        
+    
 
 
 elif selected == "Maps":
