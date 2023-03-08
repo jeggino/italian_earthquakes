@@ -2,7 +2,7 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 
 import folium
-from folium.plugins import Fullscreen,HeatMapWithTime,MiniMap
+from folium.plugins import Fullscreen,HeatMapWithTime,MiniMap,HeatMap
 from streamlit_folium import st_folium,folium_static 
 
 import pandas as pd
@@ -219,7 +219,11 @@ with st.container():
                             speed_step=1,
                             position='bottomright',
                             display_index=True
-                            ).add_to(m)
+                            ).add_to(folium.FeatureGroup(name='Timelapse Heat map').add_to(m))
+            
+            heat_data = [[row['Latitude'],row['Longitude']] for index, row in filtered_data.iterrows()]
+            HeatMap(heat_data).add_to(folium.FeatureGroup(name='Heat Map').add_to(m))
+            folium.LayerControl().add_to(m)
 
             #fullscreen
             folium.plugins.Fullscreen(position='topleft', title='Full Screen', title_cancel='Exit Full Screen', force_separate_button=True,).add_to(m)
