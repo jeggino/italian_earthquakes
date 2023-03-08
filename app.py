@@ -10,7 +10,7 @@ import geopandas as gpd
 from shapely.geometry import Point
 
 import datetime
-from datetime import date
+from datetime import date,datetime
 
 import altair as alt
 
