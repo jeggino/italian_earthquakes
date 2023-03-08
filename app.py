@@ -10,7 +10,7 @@ import geopandas as gpd
 from shapely.geometry import Point
 
 import datetime
-from datetime import date,timedelta
+from datetime import date
 
 import altair as alt
 
@@ -42,7 +42,7 @@ st.markdown(
 )
 
 today = date.today()
-years10  =date(today.year, today.month-1, today.day)
+years10  =date(today.year - 10, today.month, today.day)
 
 #---FUNCTIONS---
 @st.cache_data()  # 👈 Set the parameter
