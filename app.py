@@ -51,7 +51,7 @@ def get_data():
         number = st.sidebar.number_input('**Download the number of years**',min_value=1, max_value=15, value=2,label_visibility="visible")
         st.warning("HERE")
 
-        for i in range(int(number)):
+        for i in range(int(3)):
             a = (today.year-i)
             b = a - 1
 
