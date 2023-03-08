@@ -110,12 +110,12 @@ filtered_data = df[magnitudo_mask & deepness_mask & time_mask]
         
 selected = option_menu(
     menu_title=None,
-    options=["Make an appointment", "Cancel an appointment"],
+    options=["Maps", "Statistics"],
     icons=["bi bi-bar-chart-fill", "bi bi-pin-map-fill"],  # https://icons.getbootstrap.com/
     orientation="horizontal",
 )
 
-if selected == "Make an appointment":
+if selected == "Statistics":
 
     source_1 = filtered_data.groupby("reg_name",as_index=False).size()
     chart_1 = alt.Chart(source_1).mark_bar().encode(
@@ -145,7 +145,7 @@ if selected == "Make an appointment":
         tab3.caption('This is a string that explains something above.')
 
 
-elif selected == "Cancel an appointment":
+elif selected == "Maps":
     
     tooltip = {
        "html": """
