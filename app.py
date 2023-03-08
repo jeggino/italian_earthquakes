@@ -49,8 +49,9 @@ years10  =date(today.year - 5, today.month, today.day)
 def get_data():
     try:
         df = pd.DataFrame()
+        number = st.sidebar.number_input('Insert a number',min_value=1, max_value=15, value=2, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, *, disabled=False, label_visibility="visible")
 
-        for i in range(10):
+        for i in range(number):
             a = (today.year-i)
             b = a - 1
 
