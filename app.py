@@ -55,7 +55,7 @@ def get_data():
             a = (date.today().year-i)
             b = a - 1
 
-            df_raw = pd.read_csv(f"https://webservices.ingv.it/fdsnws/event/1/query?starttime={str(date(b, date.today().month, date.today().day))}T00%3A00%3A00&endtime={str(date(a, today.month, today.day))}T23%3A59%3A59&minmag=2&maxmag=10&mindepth=-10&maxdepth=1000&minlat=35&maxlat=49&minlon=5&maxlon=20&minversion=100&orderby=time-asc&format=text&limit=10000",
+            df_raw = pd.read_csv(f"https://webservices.ingv.it/fdsnws/event/1/query?starttime={str(date(b, date.today().month, date.today().day))}T00%3A00%3A00&endtime={str(date(a,  date.today().month,  date.today().day))}T23%3A59%3A59&minmag=2&maxmag=10&mindepth=-10&maxdepth=1000&minlat=35&maxlat=49&minlon=5&maxlon=20&minversion=100&orderby=time-asc&format=text&limit=10000",
                                     sep="|")[['Time', 'Latitude', 'Longitude', 'Depth/Km', 'Magnitude']]
 
             df = pd.concat([df, df_raw], axis=0)
