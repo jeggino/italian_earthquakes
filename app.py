@@ -48,7 +48,7 @@ st.markdown(
 def get_data():
     try:
         df = pd.DataFrame()
-        number = st.sidebar.number_input('Insert a number',min_value=1, max_value=15, value=2, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
+        number = st.sidebar.number_input('**Download the number of years**',min_value=1, max_value=15, value=2,label_visibility="visible")
 
         for i in range(int(number)):
             a = (today.year-i)
@@ -58,6 +58,8 @@ def get_data():
                                     sep="|")[['Time', 'Latitude', 'Longitude', 'Depth/Km', 'Magnitude']]
 
             df = pd.concat([df, df_raw], axis=0)
+            
+        df = df.drop_duplicates()
         df["Time"] = df["Time"].str.split("T",expand=True)[0]
         df["Magnitude"] = df["Magnitude"].astype("float")
         df["Depth/Km"] = df["Depth/Km"].astype("int")
