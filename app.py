@@ -41,8 +41,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-today = date.today()
-years10  =date(today.year - 5, today.month, today.day)
+
 
 #---FUNCTIONS---
 @st.cache_data(experimental_allow_widgets=True)  # 👈 Set the parameter
@@ -89,7 +88,9 @@ def get_data():
 
 with st.container():
     df = get_data()    
-    starttime = st.sidebar.date_input("**Start time**", value=years10, min_value=None, max_value=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
+    today = date.today()
+    years10  =date(today.year - 5, today.month, today.day)
+    starttime = st.sidebar.date_input("**Start time**", value=None, min_value=None, max_value=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
     endtime = st.sidebar.date_input("**End time**", value=None, min_value=None, max_value=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
 
     values_magnitude = st.sidebar.slider('**Magnitude**',int(df.Magnitude.min()), int(df.Magnitude.max()), (int(df.Magnitude.min()), int(df.Magnitude.max())))
