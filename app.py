@@ -142,7 +142,7 @@ if selected == "Statistics":
     )
     
     sourc_5 = filtered_data
-    chart_5 = alt.Chart(sourc_5).mark_boxplot(extent=None).encode(
+    chart_5 = alt.Chart(sourc_5).mark_boxplot().encode(
         x='reg_name:N',
         y='Magnitude:Q'
     )
