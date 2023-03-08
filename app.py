@@ -107,7 +107,7 @@ filtered_data = df[magnitudo_mask & deepness_mask & time_mask]
 selected = option_menu(
     menu_title=None,
     options=["Make an appointment", "Cancel an appointment"],
-    icons=["bi-journal-check", "bi-x-octagon-fill"],  # https://icons.getbootstrap.com/
+    icons=["bi bi-bar-chart-fill", "bi bi-pin-map-fill"],  # https://icons.getbootstrap.com/
     orientation="horizontal",
 )
 
