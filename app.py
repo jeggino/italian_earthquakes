@@ -51,7 +51,7 @@ def get_data():
         df = pd.DataFrame()
         number = st.sidebar.number_input('Insert a number',min_value=1, max_value=15, value=2, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, disabled=False, label_visibility="visible")
 
-        for i in range(number):
+        for i in range(int(number)):
             a = (today.year-i)
             b = a - 1
 
@@ -59,8 +59,6 @@ def get_data():
                                     sep="|")[['Time', 'Latitude', 'Longitude', 'Depth/Km', 'Magnitude']]
 
             df = pd.concat([df, df_raw], axis=0)
-#         df_raw = pd.read_csv(f"https://webservices.ingv.it/fdsnws/event/1/query?starttime={str(years10)}T00%3A00%3A00&endtime={str(today)}T23%3A59%3A59&minmag=2&maxmag=10&mindepth=-10&maxdepth=1000&minlat=35&maxlat=49&minlon=5&maxlon=20&minversion=100&orderby=time-asc&format=text&limit=10000",
-#                             sep="|")[['Time', 'Latitude', 'Longitude', 'Depth/Km', 'Magnitude']]
         df["Time"] = df["Time"].str.split("T",expand=True)[0]
         df["Magnitude"] = df["Magnitude"].astype("float")
         df["Depth/Km"] = df["Depth/Km"].astype("int")
