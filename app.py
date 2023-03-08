@@ -47,19 +47,29 @@ years10  =date(today.year - 5, today.month, today.day)
 #---FUNCTIONS---
 @st.cache_data()  # 👈 Set the parameter
 def get_data():
-    try:        
-        df_raw = pd.read_csv(f"https://webservices.ingv.it/fdsnws/event/1/query?starttime={str(years10)}T00%3A00%3A00&endtime={str(today)}T23%3A59%3A59&minmag=2&maxmag=10&mindepth=-10&maxdepth=1000&minlat=35&maxlat=49&minlon=5&maxlon=20&minversion=100&orderby=time-asc&format=text&limit=10000",
-                            sep="|")[['Time', 'Latitude', 'Longitude', 'Depth/Km', 'Magnitude']]
-        df_raw["Time"] = df_raw["Time"].str.split("T",expand=True)[0]
-        df_raw["Magnitude"] = df_raw["Magnitude"].astype("float")
-        df_raw["Depth/Km"] = df_raw["Depth/Km"].astype("int")
+    try:
+        df = pd.DataFrame()
+
+        for i in range(10):
+            a = (today.year-i)
+            b = a - 1
+
+            df_raw = pd.read_csv(f"https://webservices.ingv.it/fdsnws/event/1/query?starttime={str(date(b, today.month, today.day))}T00%3A00%3A00&endtime={str(date(a, today.month, today.day))}T23%3A59%3A59&minmag=2&maxmag=10&mindepth=-10&maxdepth=1000&minlat=35&maxlat=49&minlon=5&maxlon=20&minversion=100&orderby=time-asc&format=text&limit=10000",
+                                    sep="|")[['Time', 'Latitude', 'Longitude', 'Depth/Km', 'Magnitude']]
+
+            df = pd.concat([df, df_raw], axis=0)
+#         df_raw = pd.read_csv(f"https://webservices.ingv.it/fdsnws/event/1/query?starttime={str(years10)}T00%3A00%3A00&endtime={str(today)}T23%3A59%3A59&minmag=2&maxmag=10&mindepth=-10&maxdepth=1000&minlat=35&maxlat=49&minlon=5&maxlon=20&minversion=100&orderby=time-asc&format=text&limit=10000",
+#                             sep="|")[['Time', 'Latitude', 'Longitude', 'Depth/Km', 'Magnitude']]
+        df["Time"] = df["Time"].str.split("T",expand=True)[0]
+        df["Magnitude"] = df["Magnitude"].astype("float")
+        df["Depth/Km"] = df["Depth/Km"].astype("int")
         
         df_municipalities = gpd.read_file('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_municipalities.geojson')
         df_municipalities = df_municipalities[['name','prov_name','reg_name','geometry']].rename(columns={'name':'mun_name'})
         
         #zip the coordinates into a point object and convert to a GeoData Frame
-        geometry = [Point(xy) for xy in zip(df_raw.Longitude, df_raw.Latitude,)]
-        geo_df = gpd.GeoDataFrame(df_raw, geometry=geometry,crs="EPSG:4326")
+        geometry = [Point(xy) for xy in zip(df.Longitude, df.Latitude,)]
+        geo_df = gpd.GeoDataFrame(df, geometry=geometry,crs="EPSG:4326")
 
         pointInPoly_municipalities = gpd.sjoin(geo_df, df_municipalities, op='within').reset_index(drop=True).drop_duplicates()
 
