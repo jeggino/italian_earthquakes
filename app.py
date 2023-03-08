@@ -179,7 +179,7 @@ with st.container():
                             zoom_start=5)
                 
             heat_data = [[row['Latitude'],row['Longitude']] for index, row in filtered_data.iterrows()]
-            HeatMap(heat_data,radius=5).add_to(m_1)
+            HeatMap(heat_data,radius=15, blur=10).add_to(m_1)
            
 
             #---TIMELAPSE---
@@ -206,7 +206,7 @@ with st.container():
                             speed_step=1,
                             position='bottomright',
                             display_index=True
-                            ).add_to(folium.FeatureGroup(name='Timelapse Heat map').add_to(m))
+                            ).add_to(m)
             
            
 
