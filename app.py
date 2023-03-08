@@ -179,7 +179,7 @@ with st.container():
                             zoom_start=5)
                 
             heat_data = [[row['Latitude'],row['Longitude']] for index, row in filtered_data.iterrows()]
-            HeatMap(heat_data,radius=15, blur=10).add_to(m_1)
+            HeatMap(heat_data,radius=10, blur=10).add_to(m_1)
            
 
             #---TIMELAPSE---
