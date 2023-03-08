@@ -47,8 +47,7 @@ st.markdown(
 @st.cache_data(experimental_allow_widgets=True)  # 👈 Set the parameter
 def get_data():
     try:
-        with st.sidebar:
-            """real-time data from the [INGV Earthquake Department](http://cnt.rm.ingv.it/en)"""
+       
         df = pd.DataFrame()
         number = st.sidebar.number_input('**Download the number of years**',min_value=1, max_value=15, value=2,label_visibility="visible")
 
@@ -95,7 +94,12 @@ endtime = st.sidebar.date_input("**End time**", value=None,
                                 max_value=date.today(), label_visibility="visible")
 
 values_magnitude = st.sidebar.slider('**Magnitude**',int(df.Magnitude.min()), int(df.Magnitude.max()), (int(df.Magnitude.min()), int(df.Magnitude.max())))
-values_deepness = st.sidebar.slider('**Depth/Km**',int(df["Depth/Km"].min()), int(df["Depth/Km"].max()), (int(df["Depth/Km"].min()), int(df["Depth/Km"].max())))    
+values_deepness = st.sidebar.slider('**Depth/Km**',int(df["Depth/Km"].min()), int(df["Depth/Km"].max()), (int(df["Depth/Km"].min()), int(df["Depth/Km"].max())))  
+
+with st.sidebar:
+    """real-time data from the [INGV Earthquake Department](http://cnt.rm.ingv.it/en)"""
+
+
 
 
 time_mask = ((df['Time'] >= str(starttime) ) & (df['Time'] <= str(endtime)))
