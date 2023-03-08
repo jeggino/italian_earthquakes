@@ -42,7 +42,7 @@ st.markdown(
 )
 
 today = date.today()
-years10  =date(today.year - 10, today.month, today.day)
+years10  =date(today.year - 5, today.month, today.day)
 
 #---FUNCTIONS---
 @st.cache_data(experimental_allow_widgets=True)  # 👈 Set the parameter
