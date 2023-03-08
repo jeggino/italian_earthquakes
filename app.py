@@ -173,27 +173,14 @@ with st.container():
                     )
                 ],
             ), use_container_width=True)
-
-            tab2.pydeck_chart(pdk.Deck(
-                map_provider="mapbox", 
-                map_style=pdk.map_styles.SATELLITE,
-                initial_view_state=pdk.ViewState(
-                    latitude=filtered_data["Latitude"].mean(),
-                    longitude=filtered_data["Longitude"].mean(),
-                    zoom=3,
-                    pitch=0,
-                ),
-                layers=[
-                    pdk.Layer(
-                        "HeatmapLayer",
-                        data=filtered_data,
-                        opacity=1,
-                        threshold=1,
-                        get_position='[Longitude, Latitude]',
-                        pickable=True,
-                    )
-                ],
-            ), use_container_width=True)
+            
+            #---HEATMAP---
+            m_1 = folium.Map(location=[41.902782, 12.496366],
+                            zoom_start=5)
+                
+            heat_data = [[row['Latitude'],row['Longitude']] for index, row in filtered_data.iterrows()]
+            HeatMap(heat_data,radius=5).add_to(m_1)
+           
 
             #---TIMELAPSE---
             df_HeatMap = filtered_data[['Time', 'Latitude', 'Longitude']].sort_values('Time').reset_index(drop=True)
@@ -210,23 +197,23 @@ with st.container():
                            zoom_start=5)
 
 
-#             HeatMapWithTime(lat_long_list,
-#                             index=df_HeatMap.Time.unique().tolist(),
-#                             name='heatmap',
-#                             overlay=False,
-#                             radius=15,
-#                             auto_play=True,
-#                             speed_step=1,
-#                             position='bottomright',
-#                             display_index=True
-#                             ).add_to(folium.FeatureGroup(name='Timelapse Heat map').add_to(m))
+            HeatMapWithTime(lat_long_list,
+                            index=df_HeatMap.Time.unique().tolist(),
+                            name='heatmap',
+                            overlay=False,
+                            radius=15,
+                            auto_play=True,
+                            speed_step=1,
+                            position='bottomright',
+                            display_index=True
+                            ).add_to(folium.FeatureGroup(name='Timelapse Heat map').add_to(m))
             
-            heat_data = [[row['Latitude'],row['Longitude']] for index, row in filtered_data.iterrows()]
-            HeatMap(heat_data).add_to(folium.FeatureGroup(name='Heat Map').add_to(m))
-            folium.LayerControl().add_to(m)
+           
 
             #fullscreen
             folium.plugins.Fullscreen(position='topleft', title='Full Screen', title_cancel='Exit Full Screen', force_separate_button=True,).add_to(m)
-
+            
+            with tab2:
+                folium_static(m_1)
             with tab3:
                 folium_static(m)
