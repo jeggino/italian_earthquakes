@@ -137,14 +137,14 @@ if selected == "Statistics":
     
     sourc_4 = filtered_data
     chart_4 = alt.Chart(sourc_4).mark_boxplot(extent='min-max').encode(
-        x='reg_name:N',
-        y='Depth/Km:Q'
+        y='reg_name:N',
+        x='Depth/Km:Q'
     )
     
     sourc_5 = filtered_data
     chart_5 = alt.Chart(sourc_5).mark_boxplot().encode(
-        x='reg_name:N',
-        y='Magnitude:Q'
+        y='reg_name:N',
+        x='Magnitude:Q'
     )
 
     with st.expander("**Charts** 📊", expanded=True):
