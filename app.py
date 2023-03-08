@@ -213,7 +213,7 @@ with st.container():
                             radius=15,
                             auto_play=True,
                             min_speed=2,
-                            max_speed =5
+                            max_speed =5,
                             speed_step=1,
                             position='bottomright',
                             display_index=True
