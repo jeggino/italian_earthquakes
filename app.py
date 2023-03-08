@@ -156,8 +156,8 @@ if selected == "Statistics":
         tab3.altair_chart(chart_3, use_container_width=True, theme=None)
         tab3.caption('This is a string that explains something above.')
     
-    with st.expander("**Charts** 📊", expanded=True):
-        tab4, tab5 = st.tabs(["*Depth*", "*Magnitude*""])
+    with st.expander("**Charts_2** 📊", expanded=True):
+        tab4, tab5 = st.tabs(["*Depth*", "*Magnitude*"])
 
         tab4.altair_chart(chart_4, use_container_width=True, theme=None)
         tab5.altair_chart(chart_5, use_container_width=True, theme=None)
