@@ -212,7 +212,7 @@ with st.container():
                             overlay=False,
                             radius=15,
                             auto_play=True,
-                            speed_step=1,
+                            speed_step=3,
                             position='bottomright',
                             display_index=True
                             ).add_to(m)
