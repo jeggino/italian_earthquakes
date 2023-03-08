@@ -50,6 +50,7 @@ def get_data():
        
         df = pd.DataFrame()
         number = st.sidebar.number_input('**Download the number of years**',min_value=1, max_value=15, value=2,label_visibility="visible")
+        "---"
 
         for i in range(int(number)):
             
@@ -115,6 +116,8 @@ selected = option_menu(
     orientation="horizontal",
 )
 
+# --------------------------------------------------------------------------------------------------------------------
+
 if selected == "Statistics":
 
     source_1 = filtered_data.groupby("reg_name",as_index=False).size()
@@ -136,7 +139,7 @@ if selected == "Statistics":
     )
     
     sourc_4 = filtered_data
-    chart_4 = alt.Chart(sourc_4).mark_boxplot(extent='min-max').encode(
+    chart_4 = alt.Chart(sourc_4).mark_boxplot().encode(
         y='reg_name:N',
         x='Depth/Km:Q'
     )
@@ -162,7 +165,7 @@ if selected == "Statistics":
         tab4.altair_chart(chart_4, use_container_width=True, theme=None)
         tab5.altair_chart(chart_5, use_container_width=True, theme=None)
             
-
+# --------------------------------------------------------------------------------------------------------------------
 
 elif selected == "Maps":
     
