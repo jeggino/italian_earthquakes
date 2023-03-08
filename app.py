@@ -210,16 +210,16 @@ with st.container():
                            zoom_start=5)
 
 
-            HeatMapWithTime(lat_long_list,
-                            index=df_HeatMap.Time.unique().tolist(),
-                            name='heatmap',
-                            overlay=False,
-                            radius=15,
-                            auto_play=True,
-                            speed_step=1,
-                            position='bottomright',
-                            display_index=True
-                            ).add_to(folium.FeatureGroup(name='Timelapse Heat map').add_to(m))
+#             HeatMapWithTime(lat_long_list,
+#                             index=df_HeatMap.Time.unique().tolist(),
+#                             name='heatmap',
+#                             overlay=False,
+#                             radius=15,
+#                             auto_play=True,
+#                             speed_step=1,
+#                             position='bottomright',
+#                             display_index=True
+#                             ).add_to(folium.FeatureGroup(name='Timelapse Heat map').add_to(m))
             
             heat_data = [[row['Latitude'],row['Longitude']] for index, row in filtered_data.iterrows()]
             HeatMap(heat_data).add_to(folium.FeatureGroup(name='Heat Map').add_to(m))
