@@ -42,7 +42,7 @@ st.markdown(
 )
 
 today = date.today()
-years10  =date(today.year - 10, today.month, today.day)
+years10  =date(today.year - 5, today.month, today.day)
 
 #---FUNCTIONS---
 @st.cache_data()  # 👈 Set the parameter
@@ -179,7 +179,7 @@ with st.container():
                             zoom_start=5)
                 
             heat_data = [[row['Latitude'],row['Longitude']] for index, row in filtered_data.iterrows()]
-            HeatMap(heat_data,radius=10, blur=10).add_to(m_1)
+            HeatMap(heat_data,radius=8, blur=10).add_to(m_1)
            
 
             #---TIMELAPSE---
