@@ -140,6 +140,12 @@ if selected == "Statistics":
         x='reg_name:N',
         y='Depth/Km:Q'
     )
+    
+    sourc_5 = filtered_data
+    chart_5 = alt.Chart(sourc_5).mark_boxplot(extent=None).encode(
+        x='reg_name:N',
+        y='Magnitude:Q'
+    )
 
     with st.expander("**Charts** 📊", expanded=True):
         tab1, tab2, tab3 = st.tabs(["*Regions*", "*Provinces*", "*Municipalities*"])
@@ -150,9 +156,12 @@ if selected == "Statistics":
         tab3.altair_chart(chart_3, use_container_width=True, theme=None)
         tab3.caption('This is a string that explains something above.')
     
-    st.altair_chart(chart_4, use_container_width=True, theme=None)
-        
-    
+    with st.expander("**Charts** 📊", expanded=True):
+        tab4, tab5 = st.tabs(["*Depth*", "*Magnitude*""])
+
+        tab4.altair_chart(chart_4, use_container_width=True, theme=None)
+        tab5.altair_chart(chart_5, use_container_width=True, theme=None)
+            
 
 
 elif selected == "Maps":
