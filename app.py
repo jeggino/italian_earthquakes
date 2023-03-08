@@ -45,7 +45,7 @@ today = date.today()
 years10  =date(today.year - 5, today.month, today.day)
 
 #---FUNCTIONS---
-@st.cache_data()  # 👈 Set the parameter
+@st.cache_data(experimental_allow_widgets=True)  # 👈 Set the parameter
 def get_data():
     try:
         df = pd.DataFrame()
