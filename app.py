@@ -111,7 +111,7 @@ filtered_data = df[magnitudo_mask & deepness_mask & time_mask]
 selected = option_menu(
     menu_title=None,
     options=["Maps", "Statistics"],
-    icons=["bi bi-bar-chart-fill", "bi bi-pin-map-fill"],  # https://icons.getbootstrap.com/
+    icons=["bi bi-pin-map-fill", "bi bi-bar-chart-fill"],  # https://icons.getbootstrap.com/
     orientation="horizontal",
 )
 
