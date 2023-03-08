@@ -58,7 +58,7 @@ def get_data():
                                     sep="|")[['Time', 'Latitude', 'Longitude', 'Depth/Km', 'Magnitude']]
 
             df = pd.concat([df, df_raw], axis=0)
-            
+        st.warning("HERE")
         df = df.drop_duplicates()
         df["Time"] = df["Time"].str.split("T",expand=True)[0]
         df["Magnitude"] = df["Magnitude"].astype("float")
@@ -74,18 +74,10 @@ def get_data():
         pointInPoly_municipalities = gpd.sjoin(geo_df, df_municipalities, op='within').reset_index(drop=True).drop_duplicates()
 
         return  pointInPoly_municipalities[['Time', 'Latitude', 'Longitude', 'Depth/Km', 'Magnitude','mun_name','prov_name','reg_name']]
+    
     except:
         st.error('Date input error', icon="🚨")
         st.stop()
-
-# st.markdown("""
-#     <style>
-#         .stApp {
-#         background: url("https://th.bing.com/th/id/R.e6b3036960aca7aa74463f3248445d4e?rik=Pa126za3CImpJQ&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2f6%2f3%2fa%2f830914-earthquake-wallpapers-2197x1463-lockscreen.jpg&ehk=3qQRMr6YFUK1a%2fPHP6A6Rg0mc5y5Sm2PuIujOANK40I%3d&risl=&pid=ImgRaw&r=0");
-#         background-size: cover;
-#         background-transparency: "50%";
-#         }
-#     </style>""", unsafe_allow_html=True)
 
 
 with st.container():
