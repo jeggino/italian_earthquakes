@@ -304,7 +304,7 @@ elif selected == "Maps":
 
             if defintion == 'Municipalities':
                 a = filtered_data.groupby("mun_name",as_index=False).size()
-                df_municipalities = df_municipalities[['name','prov_name','reg_name','geometry']].rename(columns={'name':'mun_name'})
+                a = a[['name','prov_name','reg_name','geometry']].rename(columns={'name':'mun_name'})
                 df_ = json_municipalities.merge(a, how='inner', on='mun_name')
 
             elif defintion == 'Provinces':
