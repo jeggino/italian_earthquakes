@@ -296,22 +296,22 @@ elif selected == "Maps":
         
         #---POLYGONS LAYER---
         with tab3:
-            defintion = st.radio("Try one", ('Municipalities', 'Provinces', 'Regions'))
+            defintion = st.radio("Try one", ('Municipalities', 'Provinces', 'Regions'), horizontal=True)
 
             json_municipalities = gpd.read_file('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_municipalities.geojson')
             json_provinces = gpd.read_file('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_provinces.geojson')
             json_regions = gpd.read_file('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_regions.geojson')
 
             if defintion == 'Municipalities':
-                a = filterdata.groupby("mun_name",as_index=False).size()
+                a = filtered_data.groupby("mun_name",as_index=False).size()
                 df_ = json_municipalities.merge(a, how='inner', on='mun_name')
 
             elif defintion == 'Provinces':
-                a = filterdata.groupby("prov_name",as_index=False).size()
+                a = filtered_data.groupby("prov_name",as_index=False).size()
                 df_ = json_provinces.merge(a, how='inner', on='prov_name')
 
             elif defintion == 'Regions':
-                a = filterdata.groupby("reg_name",as_index=False).size()
+                a = filtered_data.groupby("reg_name",as_index=False).size()
                 df_ = json_provinces.merge(a, how='inner', on='reg_name')
 
 
