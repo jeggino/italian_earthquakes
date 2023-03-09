@@ -344,7 +344,7 @@ elif selected == "Maps":
 
             df_polygons["fill_color"] = df_polygons["size"].apply(lambda row: color_scale(row))
 
-            polygon_layer = pydeck.Layer(
+            polygon_layer = pdk.Layer(
                 'GeoJsonLayer',
                 df_polygons,
                 opacity=0.8,
