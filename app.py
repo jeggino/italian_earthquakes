@@ -51,12 +51,6 @@ def get_data():
         df = pd.DataFrame()
         with st.sidebar:
             """Real-time data from the [INGV Earthquake Department](http://cnt.rm.ingv.it/en) website"""
-            selected = option_menu(
-                menu_title="Pages",
-                options=["Maps", "Statistics"],
-                icons=["bi bi-pin-map-fill", "bi bi-bar-chart-fill"],  # https://icons.getbootstrap.com/
-                orientation="vertical",
-            )
             number = st.number_input('**Download the number of years**',min_value=1, max_value=15, value=2,label_visibility="visible")
 
         for i in range(int(number)):
@@ -89,6 +83,12 @@ def get_data():
         st.error('Date input error', icon="🚨")
         st.stop()
 
+selected = option_menu(
+    menu_title="Pages",
+    options=["Maps", "Statistics"],
+    icons=["bi bi-pin-map-fill", "bi bi-bar-chart-fill"],  # https://icons.getbootstrap.com/
+    orientation="vertical",
+)
 
 df = get_data()
 
@@ -102,15 +102,12 @@ endtime = st.sidebar.date_input("**End time**", value=None,
 values_magnitude = st.sidebar.slider('**Magnitude**',int(df.Magnitude.min()), int(df.Magnitude.max()), (int(df.Magnitude.min()), int(df.Magnitude.max())))
 values_deepness = st.sidebar.slider('**Depth/Km**',int(df["Depth/Km"].min()), int(df["Depth/Km"].max()), (int(df["Depth/Km"].min()), int(df["Depth/Km"].max())))  
 
-st.sidebar.text()
 
 #filtering
 time_mask = ((df['Time'] >= str(starttime) ) & (df['Time'] <= str(endtime)))
 magnitudo_mask = ((df["Magnitude"]>=values_magnitude[0]) & (df["Magnitude"]<=values_magnitude[1]))
 deepness_mask = ((df["Depth/Km"]>=values_deepness[0]) & (df["Depth/Km"]<=values_deepness[1]))
 filtered_data = df[magnitudo_mask & deepness_mask & time_mask]
-
-
 
 # --------------------------------------------------------------------------------------------------------------------
 
