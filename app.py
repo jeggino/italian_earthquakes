@@ -80,8 +80,9 @@ def get_data():
     except:
         st.error('Date input error', icon="🚨")
         st.stop()
-
-st.subheader("""Real-time data from the [INGV Earthquake Department](http://cnt.rm.ingv.it/en) website""")
+left,right = st.columns([1,3])
+left.image("https://www.ingv.it/templates/g5_helium/custom/images/INGV_logo_colore3.png")
+right.subheader("""Real-time data from the [INGV Earthquake Department](http://cnt.rm.ingv.it/en) website""")
 
 with st.sidebar:
     selected = option_menu(
