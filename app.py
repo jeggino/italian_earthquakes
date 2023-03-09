@@ -82,7 +82,7 @@ def get_data():
         st.stop()
 left,right = st.columns([1,4],gap="small")
 left.image("vhva5co7.png")
-right.subheader("""("vhva5co7.png") Real-time data from the [INGV Earthquake Department](http://cnt.rm.ingv.it/en) website""")
+right.subheader("""[]("vhva5co7.png") Real-time data from the [INGV Earthquake Department](http://cnt.rm.ingv.it/en) website""")
 
 with st.sidebar:
     selected = option_menu(
