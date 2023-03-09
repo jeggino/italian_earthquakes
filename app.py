@@ -132,19 +132,8 @@ if selected == "Statistics":
         y=alt.Y('mun_name:N', sort='-x', title="Municipalities")
     )
     
-    sourc_4 = filtered_data
-    chart_4 = alt.Chart(sourc_4).mark_boxplot().encode(
-        y='reg_name:N',
-        x='Depth/Km:Q',
-        color = alt.Color("reg_name:N", legend=None),
-    )
-    
-    sourc_5 = filtered_data
-    chart_5 = alt.Chart(sourc_5).mark_boxplot().encode(
-        y='reg_name:N',
-        x='Magnitude:Q',
-        color = alt.Color("reg_name:N", legend=None),
-    )
+    #---
+   
 
     with st.expander("**Charts** 📊", expanded=True):
         tab1, tab2, tab3 = st.tabs(["*Regions*", "*Provinces*", "*Municipalities*"])
@@ -156,6 +145,21 @@ if selected == "Statistics":
         tab3.caption('This is a string that explains something above.')
     
     with st.expander("**Charts_2** 📊", expanded=True):
+        option_1 = st.radio("*Chose the definition*", ('mun_name','prov_name','reg_name'))
+        sourc_4 = filtered_data
+        chart_4 = alt.Chart(sourc_4).mark_boxplot().encode(
+            y=option_1,
+            x='Depth/Km:Q',
+            color = alt.Color("reg_name:N", legend=None),
+        )
+
+        sourc_5 = filtered_data
+        chart_5 = alt.Chart(sourc_5).mark_boxplot().encode(
+            y=option_1,
+            x='Magnitude:Q',
+            color = alt.Color("reg_name:N", legend=None),
+        )
+        
         tab4, tab5 = st.tabs(["*Depth*", "*Magnitude*"])
 
         tab4.altair_chart(chart_4, use_container_width=True, theme=None)
