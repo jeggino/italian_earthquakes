@@ -146,19 +146,52 @@ if selected == "Statistics":
     
     with st.expander("**Charts_2** 📊", expanded=True):
         option_1 = st.radio("*Chose the definition*", ('mun_name','prov_name','reg_name'), horizontal=True)
-        sourc_4 = filtered_data
-        chart_4 = alt.Chart(sourc_4).mark_boxplot().encode(
-            y=option_1,
-            x='Depth/Km:Q',
-            color = alt.Color("reg_name:N", legend=None),
-        )
+        if option_1 == 'mun_name':
+            option_2 = st.multiselect('*Chose a municipality*',filtered_data['mun_name'].unique(),filtered_data['mun_name'].unique()[0])
+            
+            sourc_4 = filtered_data[filtered_data['mun_name'].isin(option_2)]
+            chart_4 = alt.Chart(sourc_4).mark_boxplot().encode(
+                y=option_1,
+                x='Depth/Km:Q',
+                color = alt.Color("reg_name:N", legend=None),
+            )
 
-        sourc_5 = filtered_data
-        chart_5 = alt.Chart(sourc_5).mark_boxplot().encode(
-            y=option_1,
-            x='Magnitude:Q',
-            color = alt.Color("reg_name:N", legend=None),
-        )
+            sourc_5 = filtered_data
+            chart_5 = alt.Chart(sourc_5).mark_boxplot().encode(
+                y=option_1,
+                x='Magnitude:Q',
+                color = alt.Color("reg_name:N", legend=None),
+            )
+        elif option_1 == 'prov_name':
+            option_3 = st.multiselect('*Chose a municipality*',filtered_data['prov_name'].unique(),filtered_data['prov_name'].unique()[0])
+            
+            sourc_4 = filtered_data[filtered_data['prov_name'].isin(option_3)]
+            chart_4 = alt.Chart(sourc_4).mark_boxplot().encode(
+                y=option_1,
+                x='Depth/Km:Q',
+                color = alt.Color("reg_name:N", legend=None),
+            )
+
+            sourc_5 = filtered_data
+            chart_5 = alt.Chart(sourc_5).mark_boxplot().encode(
+                y=option_1,
+                x='Magnitude:Q',
+                color = alt.Color("reg_name:N", legend=None),
+            )
+        else:            
+            sourc_4 = filtered_data
+            chart_4 = alt.Chart(sourc_4).mark_boxplot().encode(
+                y=option_1,
+                x='Depth/Km:Q',
+                color = alt.Color("reg_name:N", legend=None),
+            )
+
+            sourc_5 = filtered_data
+            chart_5 = alt.Chart(sourc_5).mark_boxplot().encode(
+                y=option_1,
+                x='Magnitude:Q',
+                color = alt.Color("reg_name:N", legend=None),
+            )
         
         tab4, tab5 = st.tabs(["*Depth*", "*Magnitude*"])
 
