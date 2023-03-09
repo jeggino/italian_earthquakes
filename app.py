@@ -145,7 +145,7 @@ if selected == "Statistics":
         tab3.caption('This is a string that explains something above.')
     
     with st.expander("**Charts_2** 📊", expanded=True):
-        option_1 = st.radio("*Chose the definition*", ('mun_name','prov_name','reg_name'))
+        option_1 = st.radio("*Chose the definition*", ('mun_name','prov_name','reg_name'), horizontal=True)
         sourc_4 = filtered_data
         chart_4 = alt.Chart(sourc_4).mark_boxplot().encode(
             y=option_1,
