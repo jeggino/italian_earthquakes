@@ -271,7 +271,7 @@ elif selected == "Maps":
                     opacity=0.9,
                     get_position=["Longitude", "Latitude"],
                     threshold=0.75,
-                    aggregation=pdk.types.String("MEAN"),
+                    aggregation=pdk.types.String("Count"),
                     pickable=True,
                 )
             ],
