@@ -253,47 +253,74 @@ elif selected == "Maps":
         ), use_container_width=True)
 
         #---HEATMAP---
-        m_1 = folium.Map(location=[41.902782, 12.496366],
-                        zoom_start=5)
+        
+        tab2.pydeck_chart(pdk.Deck(
+            map_provider="mapbox", 
+            map_style="road",
+            tooltip=tooltip,
+            initial_view_state=pdk.ViewState(
+                latitude=41.902782, 
+                longitude=12.496366,
+                zoom=4,
+                pitch=50,
+            ),
+            layers=[
+                pdk.Layer(
+                    "HeatmapLayer",
+                    data=filtered_data,
+                    opacity=0.9,
+                    get_position=["Longitude", "Latitude"],
+                    threshold=0.75,
+                    aggregation=pdk.types.String("MEAN"),
+                    pickable=True,
+                )
+            ],
+        ), use_container_width=True)
+        
+        
+        
+        
+#         m_1 = folium.Map(location=[41.902782, 12.496366],
+#                         zoom_start=5)
 
-        heat_data = [[row['Latitude'],row['Longitude']] for index, row in filtered_data.iterrows()]
-        HeatMap(heat_data,radius=8, blur=10).add_to(m_1)
-
-
-        #---TIMELAPSE---
-        df_HeatMap = filtered_data[['Time', 'Latitude', 'Longitude']].sort_values('Time').reset_index(drop=True)
-        df_HeatMap['Time'] = df_HeatMap['Time'].astype(str)
-
-        lat_long_list = []
-        for i in df_HeatMap.Time.unique():
-            temp=[]
-            for index, instance in df_HeatMap[df_HeatMap['Time'] == i].iterrows():
-                temp.append([instance['Latitude'],instance['Longitude']])
-            lat_long_list.append(temp)
-
-        m = folium.Map(location=[41.902782, 12.496366],
-                       zoom_start=5)
-
-
-        HeatMapWithTime(lat_long_list,
-                        index=df_HeatMap.Time.unique().tolist(),
-                        name='heatmap',
-                        overlay=False,
-                        radius=15,
-                        auto_play=True,
-                        min_speed=2,
-                        max_speed =5,
-                        speed_step=1,
-                        position='bottomright',
-                        display_index=True
-                        ).add_to(m)
+#         heat_data = [[row['Latitude'],row['Longitude']] for index, row in filtered_data.iterrows()]
+#         HeatMap(heat_data,radius=8, blur=10).add_to(m_1)
 
 
+#         #---TIMELAPSE---
+#         df_HeatMap = filtered_data[['Time', 'Latitude', 'Longitude']].sort_values('Time').reset_index(drop=True)
+#         df_HeatMap['Time'] = df_HeatMap['Time'].astype(str)
 
-        #fullscreen
-        folium.plugins.Fullscreen(position='topleft', title='Full Screen', title_cancel='Exit Full Screen', force_separate_button=True,).add_to(m)
+#         lat_long_list = []
+#         for i in df_HeatMap.Time.unique():
+#             temp=[]
+#             for index, instance in df_HeatMap[df_HeatMap['Time'] == i].iterrows():
+#                 temp.append([instance['Latitude'],instance['Longitude']])
+#             lat_long_list.append(temp)
+
+#         m = folium.Map(location=[41.902782, 12.496366],
+#                        zoom_start=5)
+
+
+#         HeatMapWithTime(lat_long_list,
+#                         index=df_HeatMap.Time.unique().tolist(),
+#                         name='heatmap',
+#                         overlay=False,
+#                         radius=15,
+#                         auto_play=True,
+#                         min_speed=2,
+#                         max_speed =5,
+#                         speed_step=1,
+#                         position='bottomright',
+#                         display_index=True
+#                         ).add_to(m)
+
+
+
+#         #fullscreen
+#         folium.plugins.Fullscreen(position='topleft', title='Full Screen', title_cancel='Exit Full Screen', force_separate_button=True,).add_to(m)
 
         with tab2:
-            st_folium(m_1)
+#             st_folium(m_1)
         with tab3:
-            folium_static(m)
+#             folium_static(m)
