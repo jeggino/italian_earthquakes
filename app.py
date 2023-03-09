@@ -167,11 +167,43 @@ if selected == "Statistics":
             option_3 = st.multiselect('*Chose a municipality*',filtered_data['prov_name'].unique(),filtered_data['prov_name'].unique()[0])
             
             sourc_4 = filtered_data[filtered_data['prov_name'].isin(option_3)]
-            chart_4 = alt.Chart(sourc_4).mark_boxplot().encode(
-                y=option_1,
-                x='Depth/Km:Q',
-                color = alt.Color("reg_name:N", legend=None),
+            chart_4 = alt.Chart(sourc_4
+                     ).transform_density(
+                'Depth/Km',
+                as_=['Depth/Km', 'density'],
+                extent=[1, 6],
+                groupby=[option_1]
+            ).mark_area(orient='horizontal').encode(
+                y='Depth/Km:Q',
+                color=option_1,
+                x=alt.X(
+                    'density:Q',
+                    stack='center',
+                    impute=None,
+                    title=None,
+                    axis=alt.Axis(labels=False, values=[0],grid=False, ticks=True),
+                ),
+                column=alt.Column(
+                    option_1,
+                    header=alt.Header(
+                        labelAngle=-90,
+                        titleOrient='bottom',
+                        labelOrient='bottom',
+                        labelPadding=0,
+                    ),
+                )
+            ).properties(
+                width=30
+            ).configure_facet(
+                spacing=0
+            ).configure_view(
+                stroke=None
             )
+#             chart_4 = alt.Chart(sourc_4).mark_boxplot().encode(
+#                 y=option_1,
+#                 x='Depth/Km:Q',
+#                 color = alt.Color("reg_name:N", legend=None),
+#             )
 
             sourc_5 = filtered_data
             chart_5 = alt.Chart(sourc_5).mark_boxplot().encode(
