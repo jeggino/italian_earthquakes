@@ -239,7 +239,7 @@ elif selected == "Maps":
                     opacity=0.3,
                     stroked=True,
                     filled=True,
-                    radius_scale=10,
+                    radius_scale=7,
                     radius_min_pixels=10,
                     radius_max_pixels=100,
                     line_width_min_pixels=1,
