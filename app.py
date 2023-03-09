@@ -80,7 +80,7 @@ def get_data():
     except:
         st.error('Date input error', icon="🚨")
         st.stop()
-left,right = st.columns([1,3])
+left,right = st.columns([1,2],gap="small")
 left.image("vhva5co7.png")
 right.subheader("""Real-time data from the [INGV Earthquake Department](http://cnt.rm.ingv.it/en) website""")
 
