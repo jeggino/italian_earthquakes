@@ -254,11 +254,12 @@ elif selected == "Maps":
 
         #---HEATMAP---
         COLOR_BREWER_BLUE_SCALE = [
+            
             [213, 0, 0],
-            [69, 0, 3],
+             [69, 0, 3],
             [255, 3, 14],
             [255, 129, 134],
-            [255, 192, 195]
+            [255, 192, 195],
         ]
         
         tab2.pydeck_chart(pdk.Deck(
