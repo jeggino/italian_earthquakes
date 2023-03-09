@@ -313,7 +313,7 @@ elif selected == "Maps":
 
             elif defintion == 'Regions':
                 a = filtered_data.groupby("reg_name",as_index=False).size()
-                df_ = json_provinces.merge(a, how='inner', on='reg_name')
+                df_ = json_regions.merge(a, how='inner', on='reg_name')
 
 
             COLOR_RANGE = [
