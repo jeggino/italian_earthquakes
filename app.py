@@ -294,6 +294,92 @@ elif selected == "Maps":
             ],
         ), use_container_width=True)
         
+        with tab3:
+            defintion = st.radio("Try one", ('Municipalities', 'Provinces', 'Regions'))
+
+            json_municipalities = gpd.read_file('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_municipalities.geojson')
+            json_provinces = gpd.read_file('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_provinces.geojson')
+            json_regions = gpd.read_file('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_regions.geojson')
+
+            if defintion == 'Municipalities':
+                a = filterdata.groupby("mun_name",as_index=False).size()
+                df_ = json_municipalities.merge(a, how='inner', on='mun_name')
+
+            elif defintion == 'Provinces':
+                a = filterdata.groupby("prov_name",as_index=False).size()
+                df_ = json_provinces.merge(a, how='inner', on='prov_name')
+
+            elif defintion == 'Regions':
+                a = filterdata.groupby("reg_name",as_index=False).size()
+                df_ = json_provinces.merge(a, how='inner', on='reg_name')
+
+
+            COLOR_RANGE = [
+                [255,255,204],
+                [254, 217, 118],
+                [253, 141, 60],
+                [128, 0, 38],
+                [90,0,25],
+                [50,0,15]
+            ]
+
+            df = df_
+
+
+            BREAKS = [(df['size'].max()*1)/6,
+                      (df['size'].max()*2)/6,
+                      (df['size'].max()*3)/6,
+                      (df['size'].max()*4)/6,
+                      (df['size'].max()*5)/6,
+                      df['size'].max()/6,]
+
+
+            def color_scale(val):
+                for i, b in enumerate(BREAKS):
+                    if val < b:
+                        return COLOR_RANGE[i]
+                return COLOR_RANGE[i]
+
+
+
+            df["fill_color"] = df["size"].apply(lambda row: color_scale(row))
+
+            polygon_layer = pydeck.Layer(
+                'GeoJsonLayer',
+                df,
+                opacity=0.8,
+                stroked=True,
+                filled=True,
+                extruded=True,
+                wireframe=True,
+                get_elevation='size*10',
+                get_fill_color='fill_color',
+                get_line_color=[255, 255, 255],
+                pickable=True
+            )
+
+
+            tooltip = {
+                   "html": """
+                    <b>Number of earthquakes:</b> {size} <br />
+                    """,
+                   "style": {
+                        "backgroundColor": "steelblue",
+                        "color": "white"
+                   }
+                }
+
+            r = pdk.Deck(
+                polygon_layer,
+                initial_view_state=INITIAL_VIEW_STATE,
+                map_style=pdk.map_styles.LIGHT,
+                tooltip=tooltip,
+            )
+
+
+            st.pydeck_chart(r, use_container_width=True)
+            
+        
         
         
         
