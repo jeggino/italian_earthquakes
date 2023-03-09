@@ -81,7 +81,7 @@ def get_data():
         st.error('Date input error', icon="🚨")
         st.stop()
 left,right = st.columns([1,3])
-left.image("https://www.ingv.it/templates/g5_helium/custom/images/INGV_logo_colore3.png")
+left.image("http://cnt.rm.ingv.it/images/ingv_logo_colore.png")
 right.subheader("""Real-time data from the [INGV Earthquake Department](http://cnt.rm.ingv.it/en) website""")
 
 with st.sidebar:
