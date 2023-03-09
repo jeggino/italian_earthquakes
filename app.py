@@ -173,7 +173,7 @@ if selected == "Statistics":
                 as_=['Depth/Km', 'density'],
                 extent=[0, 600],
                 groupby=[option_1]
-            ).mark_area(orient='horizontal').encode(
+            ).mark_area(orient='vertical').encode(
                 x='Depth/Km:Q',
                 color=option_1,
                 y=alt.Y(
