@@ -81,7 +81,7 @@ def get_data():
         st.error('Date input error', icon="🚨")
         st.stop()
 
-st.header("""Real-time data from the [INGV Earthquake Department](http://cnt.rm.ingv.it/en) website""")
+st.subheader("""Real-time data from the [INGV Earthquake Department](http://cnt.rm.ingv.it/en) website""")
 
 with st.sidebar:
     selected = option_menu(
