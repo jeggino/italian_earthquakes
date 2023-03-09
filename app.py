@@ -81,6 +81,8 @@ def get_data():
         st.error('Date input error', icon="🚨")
         st.stop()
 
+st.title("""Real-time data from the [INGV Earthquake Department](http://cnt.rm.ingv.it/en) website""")
+
 with st.sidebar:
     selected = option_menu(
         menu_title="Pages",
@@ -88,8 +90,6 @@ with st.sidebar:
         icons=["bi bi-pin-map-fill", "bi bi-bar-chart-fill"],  # https://icons.getbootstrap.com/
         orientation="vertical",
     )
-
-    """Real-time data from the [INGV Earthquake Department](http://cnt.rm.ingv.it/en) website"""
 
     df = get_data()
 
