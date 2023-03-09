@@ -294,6 +294,7 @@ elif selected == "Maps":
             ],
         ), use_container_width=True)
         
+        #---POLYGONS LAYER---
         with tab3:
             defintion = st.radio("Try one", ('Municipalities', 'Provinces', 'Regions'))
 
