@@ -276,7 +276,7 @@ elif selected == "Maps":
                 pdk.Layer(
                     "HeatmapLayer",
                     data=filtered_data,
-                    opacity=1,
+                    opacity=0.7,
                     color_range=COLOR_BREWER_BLUE_SCALE,
                     get_position=["Longitude", "Latitude"],
                     threshold=0.2,
