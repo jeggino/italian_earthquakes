@@ -253,6 +253,14 @@ elif selected == "Maps":
         ), use_container_width=True)
 
         #---HEATMAP---
+        COLOR_BREWER_BLUE_SCALE = [
+            [240, 249, 232],
+            [204, 235, 197],
+            [168, 221, 181],
+            [123, 204, 196],
+            [67, 162, 202],
+            [8, 104, 172],
+        ]
         
         tab2.pydeck_chart(pdk.Deck(
             map_provider="mapbox", 
@@ -268,9 +276,10 @@ elif selected == "Maps":
                 pdk.Layer(
                     "HeatmapLayer",
                     data=filtered_data,
-                    opacity=0.9,
+                    opacity=1,
+                    color_range=COLOR_BREWER_BLUE_SCALE,
                     get_position=["Longitude", "Latitude"],
-                    threshold=0.75,
+                    threshold=1,
                     aggregation=pdk.types.String("Count"),
                     pickable=True,
                 )
