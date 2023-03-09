@@ -176,7 +176,7 @@ if selected == "Statistics":
             ).mark_area(orient='horizontal').encode(
                 x='Depth/Km:Q',
                 color=option_1,
-                y=alt.y(
+                y=alt.Y(
                     'density:Q',
                     stack='center',
                     impute=None,
