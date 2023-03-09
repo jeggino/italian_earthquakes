@@ -80,9 +80,9 @@ def get_data():
     except:
         st.error('Date input error', icon="🚨")
         st.stop()
-left,right = st.columns([1,4],gap="small")
-left.image("vhva5co7.png")
-right.subheader("""[]("vhva5co7.png") Real-time data from the [INGV Earthquake Department](http://cnt.rm.ingv.it/en) website""")
+left,right = st.columns([1,5],gap="small")
+left.image("vhva5co7.png",use_column_width='always')
+right.subheader("""Real-time data from the [INGV Earthquake Department](http://cnt.rm.ingv.it/en) website""")
 
 with st.sidebar:
     selected = option_menu(
