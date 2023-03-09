@@ -171,7 +171,7 @@ if selected == "Statistics":
                      ).transform_density(
                 'Depth/Km',
                 as_=['Depth/Km', 'density'],
-                extent=[1, 6],
+                extent=[0, 600],
                 groupby=[option_1]
             ).mark_area(orient='horizontal').encode(
                 y='Depth/Km:Q',
@@ -192,8 +192,6 @@ if selected == "Statistics":
                         labelPadding=0,
                     ),
                 )
-            ).properties(
-                width=30
             ).configure_facet(
                 spacing=0
             ).configure_view(
