@@ -296,23 +296,22 @@ elif selected == "Maps":
         
         #---POLYGONS LAYER---
         with tab3:
-            defintion = st.radio("Try one", ('Municipalities', 'Provinces', 'Regions'), horizontal=True)
-
-            json_municipalities = gpd.read_file('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_municipalities.geojson')
-            json_provinces = gpd.read_file('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_provinces.geojson')
-            json_regions = gpd.read_file('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_regions.geojson')
+            defintion = st.radio("Try one", ('Municipalities', 'Provinces', 'Regions'), horizontal=True) 
 
             if defintion == 'Municipalities':
                 a = filtered_data.groupby("mun_name",as_index=False).size()
+                json_municipalities = gpd.read_file('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_municipalities.geojson')
                 json_municipalities = json_municipalities[['name','prov_name','reg_name','geometry']].rename(columns={'name':'mun_name'})
                 df_ = json_municipalities.merge(a, how='inner', on='mun_name')
 
             elif defintion == 'Provinces':
                 a = filtered_data.groupby("prov_name",as_index=False).size()
+                json_provinces = gpd.read_file('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_provinces.geojson')
                 df_ = json_provinces.merge(a, how='inner', on='prov_name')
 
             elif defintion == 'Regions':
                 a = filtered_data.groupby("reg_name",as_index=False).size()
+                json_regions = gpd.read_file('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_regions.geojson')
                 df_ = json_regions.merge(a, how='inner', on='reg_name')
 
 
@@ -325,16 +324,16 @@ elif selected == "Maps":
                 [50,0,15]
             ]
 
-            df = df_
+            df_polygons = df_
             st.dataframe(df.drop("geometry",axis=1))
 
 
-            BREAKS = [(df['size'].max()*1)/6,
-                      (df['size'].max()*2)/6,
-                      (df['size'].max()*3)/6,
-                      (df['size'].max()*4)/6,
-                      (df['size'].max()*5)/6,
-                      df['size'].max()/6,]
+            BREAKS = [(df_polygons['size'].max()*1)/6,
+                      (df_polygons['size'].max()*2)/6,
+                      (df_polygons['size'].max()*3)/6,
+                      (df_polygons['size'].max()*4)/6,
+                      (df_polygons['size'].max()*5)/6,
+                      df_polygons['size'].max()/6,]
 
 
             def color_scale(val):
@@ -345,11 +344,11 @@ elif selected == "Maps":
 
 
 
-            df["fill_color"] = df["size"].apply(lambda row: color_scale(row))
+            df_polygons["fill_color"] = df_polygons["size"].apply(lambda row: color_scale(row))
 
             polygon_layer = pydeck.Layer(
                 'GeoJsonLayer',
-                df,
+                df_polygons,
                 opacity=0.8,
                 stroked=True,
                 filled=True,
