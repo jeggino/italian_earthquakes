@@ -326,6 +326,7 @@ elif selected == "Maps":
             ]
 
             df = df_
+            st.dataframe(df)
 
 
             BREAKS = [(df['size'].max()*1)/6,
