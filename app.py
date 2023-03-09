@@ -325,6 +325,15 @@ elif selected == "Maps":
             ]
 
             df_polygons = df_
+            
+            INITIAL_VIEW_STATE = pydeck.ViewState(
+                latitude=41.902782, 
+                longitude=12.496366,
+                zoom=4.5,
+                max_zoom=11,
+                pitch=45,
+                bearing=0
+            )
 
             BREAKS = [(df_polygons['size'].max()*1)/6,
                       (df_polygons['size'].max()*2)/6,
