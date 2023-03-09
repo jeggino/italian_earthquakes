@@ -326,7 +326,7 @@ elif selected == "Maps":
 
             df_polygons = df_
             
-            INITIAL_VIEW_STATE = pydeck.ViewState(
+            INITIAL_VIEW_STATE = pdk.ViewState(
                 latitude=41.902782, 
                 longitude=12.496366,
                 zoom=4.5,
