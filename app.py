@@ -49,9 +49,7 @@ def get_data():
     try:
        
         df = pd.DataFrame()
-        with st.sidebar:
-            
-            number = st.number_input('**Download the number of years**',min_value=1, max_value=15, value=2,label_visibility="visible")
+        number = st.number_input('**Download the number of years**',min_value=1, max_value=15, value=2,label_visibility="visible")
 
         for i in range(int(number)):
             
@@ -103,7 +101,7 @@ with st.sidebar:
                                     max_value=date.today(), label_visibility="visible")
 
     values_magnitude = st.slider('**Magnitude**',int(df.Magnitude.min()), int(df.Magnitude.max()), (int(df.Magnitude.min()), int(df.Magnitude.max())))
-values_deepness = st.slider('**Depth/Km**',int(df["Depth/Km"].min()), int(df["Depth/Km"].max()), (int(df["Depth/Km"].min()), int(df["Depth/Km"].max())))  
+    values_deepness = st.slider('**Depth/Km**',int(df["Depth/Km"].min()), int(df["Depth/Km"].max()), (int(df["Depth/Km"].min()), int(df["Depth/Km"].max())))  
 
 
 #filtering
