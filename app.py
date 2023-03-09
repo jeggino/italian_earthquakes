@@ -174,16 +174,16 @@ if selected == "Statistics":
                 extent=[0, 600],
                 groupby=[option_1]
             ).mark_area(orient='horizontal').encode(
-                y='Depth/Km:Q',
+                x='Depth/Km:Q',
                 color=option_1,
-                x=alt.X(
+                y=alt.y(
                     'density:Q',
                     stack='center',
                     impute=None,
                     title=None,
                     axis=alt.Axis(labels=False, values=[0],grid=False, ticks=True),
                 ),
-                column=alt.Column(
+                row=alt.Row(
                     option_1,
                     header=alt.Header(
                         labelAngle=-90,
