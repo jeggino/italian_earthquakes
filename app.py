@@ -279,7 +279,7 @@ elif selected == "Maps":
                     opacity=1,
                     color_range=COLOR_BREWER_BLUE_SCALE,
                     get_position=["Longitude", "Latitude"],
-                    threshold=5,
+                    threshold=0.2,
                     aggregation=pdk.types.String("Count"),
                     pickable=True,
                 )
