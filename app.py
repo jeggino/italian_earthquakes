@@ -50,7 +50,7 @@ def get_data():
        
         df = pd.DataFrame()
         with st.sidebar:
-            """Real-time data from the [INGV Earthquake Department](http://cnt.rm.ingv.it/en) website"""
+            
             number = st.number_input('**Download the number of years**',min_value=1, max_value=15, value=2,label_visibility="visible")
 
         for i in range(int(number)):
@@ -83,24 +83,27 @@ def get_data():
         st.error('Date input error', icon="🚨")
         st.stop()
 
-selected = option_menu(
-    menu_title="Pages",
-    options=["Maps", "Statistics"],
-    icons=["bi bi-pin-map-fill", "bi bi-bar-chart-fill"],  # https://icons.getbootstrap.com/
-    orientation="vertical",
-)
+with st.sidebar:
+    selected = option_menu(
+        menu_title="Pages",
+        options=["Maps", "Statistics"],
+        icons=["bi bi-pin-map-fill", "bi bi-bar-chart-fill"],  # https://icons.getbootstrap.com/
+        orientation="vertical",
+    )
 
-df = get_data()
+    """Real-time data from the [INGV Earthquake Department](http://cnt.rm.ingv.it/en) website"""
 
-starttime = st.sidebar.date_input("**Start time**", value=date(date.today().year, date.today().month, date.today().day-1), 
-                                  min_value=datetime.strptime(df.Time.min(),'%Y-%m-%d'), 
-                                  max_value=date.today(), label_visibility="visible")
-endtime = st.sidebar.date_input("**End time**", value=None, 
-                                min_value=datetime.strptime(df.Time.min(),'%Y-%m-%d'), 
-                                max_value=date.today(), label_visibility="visible")
+    df = get_data()
 
-values_magnitude = st.sidebar.slider('**Magnitude**',int(df.Magnitude.min()), int(df.Magnitude.max()), (int(df.Magnitude.min()), int(df.Magnitude.max())))
-values_deepness = st.sidebar.slider('**Depth/Km**',int(df["Depth/Km"].min()), int(df["Depth/Km"].max()), (int(df["Depth/Km"].min()), int(df["Depth/Km"].max())))  
+    starttime = st.date_input("**Start time**", value=date(date.today().year, date.today().month, date.today().day-1), 
+                                      min_value=datetime.strptime(df.Time.min(),'%Y-%m-%d'), 
+                                      max_value=date.today(), label_visibility="visible")
+    endtime = st.date_input("**End time**", value=None, 
+                                    min_value=datetime.strptime(df.Time.min(),'%Y-%m-%d'), 
+                                    max_value=date.today(), label_visibility="visible")
+
+    values_magnitude = st.slider('**Magnitude**',int(df.Magnitude.min()), int(df.Magnitude.max()), (int(df.Magnitude.min()), int(df.Magnitude.max())))
+values_deepness = st.slider('**Depth/Km**',int(df["Depth/Km"].min()), int(df["Depth/Km"].max()), (int(df["Depth/Km"].min()), int(df["Depth/Km"].max())))  
 
 
 #filtering
